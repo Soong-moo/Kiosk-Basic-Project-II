@@ -10,7 +10,9 @@ public class DBConnect {
 
 	public static Connection con = null;
 	public static Statement st = null;
+	public static Statement stp = null;
 	public static ResultSet rs = null;
+	public static ResultSet rsp = null;
 	public PreparedStatement pst = null;
 
 	public void connect() throws SQLException {
@@ -29,12 +31,14 @@ public class DBConnect {
 			// 드라이버 매니저에게 Connection 객체를 달라고 요청한다.
 			// Connection을 얻기 위해 필요한 url 역시, 벤더사마다 다르다.
 			// mysql은 "jdbc:mysql://localhost/사용할db이름" 이다.
-			String url = "jdbc:mysql://localhost/kioskDB";
+			String url = "jdbc:mysql://localhost/kioskDB?useUnicode=true&serverTimezone=UTC";
 
 			// @param getConnection(url, userName, password);
 			// @return Connection
 			con = DriverManager.getConnection(url, "test", "test");
 			st = con.createStatement();
+			stp = con.createStatement();
+			//stp = conp.createStatement();
 			System.out.println("연결 성공");
 			
 //			if(con != null) con.close();
@@ -49,6 +53,9 @@ public class DBConnect {
 		}
 	}
 	
+	
+	
+	
 	public static void test() {
 		String sql = "SELECT productId, categoryId, name, price FROM productdata";
 		try {
@@ -58,8 +65,26 @@ public class DBConnect {
 		}
 	}
 	
+	public static void optionPrice() {
+		String sqlp = "SELECT optionId, optionName, optionPrice FROM optionData";
+	
+		try {
+			rsp = stp.executeQuery(sqlp);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+	
+	
 	public static void main(String[] args) {
 	//	new DBConnect().connect();
 	}
+	
+	
 
 }

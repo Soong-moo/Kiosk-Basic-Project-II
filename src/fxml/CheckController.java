@@ -1,8 +1,10 @@
 package fxml;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,7 +12,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import tableView.Product;
 
 public class CheckController implements Initializable{ 
 	
@@ -19,24 +25,34 @@ public class CheckController implements Initializable{
 	@FXML
 	private Button btnCancel;
 	@FXML
-	private Label menu1;
+	private TableView<Product> tableView;
 	@FXML
-	private Label menu2;
+	private TableColumn<Product, String> nameColumn;
 	@FXML
-	private Label menu3;
+	private TableColumn<Product, Integer> priceColumn;
 	@FXML
-	private Label price1;
+	private TableColumn<Product, Integer> countColumn;	
 	@FXML
-	private Label price2;
+	private TableColumn<Product, String> option1Column;
 	@FXML
-	private Label price3;
+	private TableColumn<Product, String> option2Column;
+	@FXML
+	private TableColumn<Product, String> option3Column;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		//menu1.setText(OrderController.t.get(0).getName());
-		//menu2.setText(OrderController.t.get(1).getName());
-		//price1.setText(String.valueOf(OrderController.t.get(0).getPrice()));
-		//price2.setText(String.valueOf(OrderController.t.get(1).getPrice()));
+		ArrayList<Product> arrayProduct = OrderController.arrayProduct;
+		ObservableList<Product> products = tableView.getItems();
+		products.addAll(arrayProduct);
+		tableView.setItems(products);
+		tableView.setPlaceholder(new Label());
+		nameColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
+		priceColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("price"));
+		countColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("count"));
+		option1Column.setCellValueFactory(new PropertyValueFactory<Product, String>("option1"));
+		option2Column.setCellValueFactory(new PropertyValueFactory<Product, String>("option2"));
+		option3Column.setCellValueFactory(new PropertyValueFactory<Product, String>("option3"));
+		
 	}
 	
 	

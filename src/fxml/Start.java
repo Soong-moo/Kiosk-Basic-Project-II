@@ -9,6 +9,10 @@ import javafx.fxml.FXMLLoader;
 import Database.DBConnect;
 
 public class Start extends Application {
+	
+
+	
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {

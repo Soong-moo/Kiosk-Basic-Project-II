@@ -1,5 +1,6 @@
 package fxml;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -17,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,7 +28,6 @@ import java.util.ResourceBundle;
 
 import Database.DBConnect;
 import tableView.Product;
-
 /*
  * button 10개정도? categoryId와 버튼을 눌렀을 때 해당하는 제품명 가격 개수 장바구니
  */
@@ -33,7 +35,7 @@ import tableView.Product;
 public class OrderController implements Initializable {
 
 	@FXML
-	private Button btnOrder;
+	private Button btnOrder; // 주문버튼
 
 	@FXML
 	private Button popular1;
@@ -89,13 +91,26 @@ public class OrderController implements Initializable {
 	@FXML
 	private Button beverage11; // 진저하이볼
 	@FXML
-	private Button next;
+	private Button next; // 음료 앞 넘김
 	@FXML
-	private Button back;
+	private Button back; // 음료 뒤 넘김
 	@FXML
 	private Pane pnlBeverageFirst;
 	@FXML
 	private Pane pnlBeverageSecond;
+
+	@FXML
+	private Label oLabel1, oLabel2, oLabel3, opInfo1;
+	@FXML
+	private ComboBox<String> ocombobox1, ocombobox2, ocombobox3;
+	@FXML
+	private Button obutton1, obutton2;
+	@FXML
+	private ObservableList<String> olist1 = FXCollections.observableArrayList("선택 안함", "비프", "통새우 4개", "통새우 8개");
+
+	private ObservableList<String> olist2 = FXCollections.observableArrayList("선택 안함", "치즈 1장", "치즈 2장", "치즈 3장");
+
+	private ObservableList<String> olist3 = FXCollections.observableArrayList("선택 안함", "아보카도", "파인애플", "피클", "할라피뇨", "기본 야채 추가");
 
 	@FXML
 	private Button plus;
@@ -109,24 +124,66 @@ public class OrderController implements Initializable {
 	private TableColumn<Product, Integer> priceColumn;
 	@FXML
 	private TableColumn<Product, Integer> countColumn;
+	@FXML
+	private TableColumn<Product, String> option1Column;
+	@FXML
+	private TableColumn<Product, String> option2Column;
+	@FXML
+	private TableColumn<Product, String> option3Column;
 
-	public static ArrayList<Product> t = new ArrayList<>();
+	public static ArrayList<Product> arrayProduct = new ArrayList<>();
 
 	int i = 0; // i = plus,minus
 	String name;
 	int price;
-	boolean flag; // page animation
+	int categoryID;
+
+	String p_name;
+	int p_price;
+
+	String productButtonInfo;
+	String optionPageStr1;
+	String optionPageStr2;
+	String optionPageStr3;
+	
+	int optionPage1=99;
+	int optionPage2=99;
+	int optionPage3=99;
+	
+	int optionID;
+	String  optionName;
+	int optionPrice=0;
+	
+	public void opInfoLabel() {
+		opInfo1.setText(productButtonInfo);
+	}
+	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ObservableList<Product> products = tableView.getItems();
-		products.addAll(t);
+		products.addAll(arrayProduct);
 		tableView.setItems(products);
 		tableView.setPlaceholder(new Label());
 		nameColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
 		priceColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("price"));
 		countColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("count"));
+		option1Column.setCellValueFactory(new PropertyValueFactory<Product, String>("option1"));
+		option2Column.setCellValueFactory(new PropertyValueFactory<Product, String>("option2"));
+		option3Column.setCellValueFactory(new PropertyValueFactory<Product, String>("option3"));
+		
+        ocombobox1.setItems(olist1);    
+        ocombobox2.setItems(olist2);  
+        ocombobox3.setItems(olist3); 
 	}
+/*
+    //옵션 change
+    public void comboChange(ActionEvent event) {
+        oLabel1.setText(ocombobox1.getValue());
+        oLabel2.setText(ocombobox2.getValue());
+        oLabel3.setText(ocombobox3.getValue());
+    }
+    */
 
 	// onAction
 	public void order() throws Exception {
@@ -139,6 +196,9 @@ public class OrderController implements Initializable {
 
 	// 장바구니
 	public void testClick(ActionEvent event) throws Exception {
+		
+		
+		
 
 		// if(event.getSource() == burger1) return; //선택 방법 1
 
@@ -146,70 +206,103 @@ public class OrderController implements Initializable {
 
 		switch (btn) {
 		case "burger1":
-			addMenu("치즈버거");
+			productButtonInfo = "치즈버거";
+			categoryID = 2;
 			break;
 		case "burger2":
-			addMenu("치킨버거");
+			productButtonInfo = "치킨버거";
+			categoryID = 2;
 			break;
 		case "burger3":
-			addMenu("불고기버거");
+			productButtonInfo = "불고기버거";
+			categoryID = 2;
 			break;
 		case "burger4":
-			addMenu("새우버거");
+			productButtonInfo = "새우버거";
+			categoryID = 2;
 			break;
 
 		case "side1":
-			addMenu("감자튀김");
+			productButtonInfo = "감자튀김";
+			categoryID = 3;
 			break;
 		case "side2":
-			addMenu("치즈 감자튀김");
+			productButtonInfo = "치즈 감자튀김";
+			categoryID = 3;
 			break;
 		case "side3":
-			addMenu("베이컨 치즈 감자튀김");
+			productButtonInfo = "베이컨 치즈 감자튀김";
+			categoryID = 3;
 			break;
 		case "side4":
-			addMenu("스파이시 치플레 감자튀김");
+			productButtonInfo = "스파이시 치플레 감자튀김";
+			categoryID = 3;
 			break;
 		case "side5":
-			addMenu("치킨텐더");
+			productButtonInfo = "치킨텐더";
+			categoryID = 3;
 			break;
 		case "side6":
-			addMenu("치즈볼");
+			productButtonInfo = "치즈볼";
+			categoryID = 3;
 			break;
 		case "beverage1":
-			addMenu("코카콜라");
+			productButtonInfo = "코카콜라";
+			categoryID = 4;
 			break;
 		case "beverage2":
-			addMenu("제로 코카콜라");
+			productButtonInfo = "제로 코카콜라";
+			categoryID = 4;
 			break;
 		case "beverage3":
-			addMenu("스프라이트");
+			productButtonInfo = "스프라이트";
+			categoryID = 4;
 			break;
 		case "beverage4":
-			addMenu("제로 스프라이트");
+			productButtonInfo = "제로 스프라이트";
+			categoryID = 4;
 			break;
 		case "beverage5":
-			addMenu("환타");
+			productButtonInfo = "환타";
+			categoryID = 4;
 			break;
 		case "beverage6":
-			addMenu("밀크쉐이크");
+			productButtonInfo = "밀크쉐이크";
+			categoryID = 4;
 			break;
 		case "beverage7":
-			addMenu("페리에 라임");
+			productButtonInfo = "페리에 라임";
+			categoryID = 4;
 			break;
 		case "beverage8":
-			addMenu("닥터페퍼");
+			productButtonInfo = "닥터페퍼";
+			categoryID = 4;
 			break;
 		case "beverage9":
-			addMenu("크림소다");
+			productButtonInfo = "크림소다";
+			categoryID = 4;
 			break;
 		case "beverage10":
-			addMenu("하이볼");
+			productButtonInfo = "하이볼";
+			categoryID = 4;
 			break;
 		case "beverage11":
-			addMenu("진저하이볼");
+			productButtonInfo = "진저하이볼";
+			categoryID = 4;
 			break;
 		}
+	
+    	
+		
+    	if(categoryID != 2) {
+    		addMenu(productButtonInfo, optionPrice);
+    	}
+    	else {
+    		opInfoLabel();
+    	}
+		
+    	
+		
 	}
 
 	public void changeScene(ActionEvent event) {
@@ -225,15 +318,15 @@ public class OrderController implements Initializable {
 		try {
 			Product p = tableView.getSelectionModel().getSelectedItem();
 			ObservableList<Product> products = tableView.getItems();
-			Iterator<Product> itr = t.iterator();
+			Iterator<Product> itr = arrayProduct.iterator();
 
 			while (itr.hasNext()) {
 				Product exist = itr.next();
 				if (exist.getName().equals(p.getName())) {
 					int cnt = exist.getCount();
-					exist.setCount(++cnt);
+						exist.setCount(++cnt);
 					tableView.getItems().clear();
-					products.addAll(t);
+					products.addAll(arrayProduct);
 					break;
 				}
 			}
@@ -248,7 +341,7 @@ public class OrderController implements Initializable {
 		try {
 			Product p = tableView.getSelectionModel().getSelectedItem();
 			ObservableList<Product> products = tableView.getItems();
-			Iterator<Product> itr = t.iterator();
+			Iterator<Product> itr = arrayProduct.iterator();
 
 			while (itr.hasNext()) {
 				Product exist = itr.next();
@@ -256,10 +349,10 @@ public class OrderController implements Initializable {
 					int cnt = exist.getCount();
 					exist.setCount(--cnt);
 					if (exist.getCount() <= 0) {
-						t.remove(i);
+						arrayProduct.remove(i);
 					}
 					tableView.getItems().clear();
-					products.addAll(t);
+					products.addAll(arrayProduct);
 					break;
 				}
 				i++;
@@ -279,10 +372,140 @@ public class OrderController implements Initializable {
 		alert.showAndWait();
 	}
 
-	// TableView 값 저장 Method
-	public void addMenu(String n) {
 
-		Iterator<Product> itr = t.iterator();
+	// 중복값 알림
+	public void optionNotChoiceWarning() {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("옵션이 비어있음!");
+		alert.setHeaderText("옵션을 선택해주세요!");
+		alert.showAndWait();
+	}
+	
+	
+	//옵션 페이지 모두 선택 안함 액션
+	public void optionOrder1() throws Exception {
+		optionPage1 = 0;
+		optionPage2 = 0;
+		optionPage3 = 0;
+		optionPageStr1 = "X";
+		optionPageStr2 = "X";
+		optionPageStr3 = "X";
+		
+		optionPrice = 0;
+		
+		addMenu(productButtonInfo, optionPrice);
+	}
+    
+    //옵션 페이지 선택 완료 액션
+    public void optionOrder2() throws IOException, SQLException {
+    	DBConnect.optionPrice();
+    	
+    	
+    	
+    	
+    	
+    	
+		if (olist1.get(0).equals(ocombobox1.getValue())) {
+			optionPage1 = 0;
+			optionPageStr1 = "X";
+		}
+		else if (olist1.get(1).equals(ocombobox1.getValue())) {
+			optionPage1 = 1;
+			optionPageStr1 = "비프";
+		}
+		else if (olist1.get(2).equals(ocombobox1.getValue())) {
+			optionPage1 = 2;	
+			optionPageStr1 = "통새우 4개";
+		}
+		else if (olist1.get(3).equals(ocombobox1.getValue())) {
+			optionPage1 = 3;
+			optionPageStr1 = "통새우 8개";
+		}
+		
+			
+		if (olist2.get(0).equals(ocombobox2.getValue())) {
+			optionPage2 = 0;
+			optionPageStr2 = "X";
+		}
+		else if (olist2.get(1).equals(ocombobox2.getValue())) {
+			optionPage2 = 4;
+			optionPageStr2 = "치즈 1장";
+		}
+		else if (olist2.get(2).equals(ocombobox2.getValue())) {
+			optionPage2 = 5;
+			optionPageStr2 = "치즈 2장";
+		}
+		else if (olist2.get(3).equals(ocombobox2.getValue())) {
+			optionPage2 = 6;
+			optionPageStr2 = "치즈 3장";
+		}
+		
+		
+			
+		if (olist3.get(0).equals(ocombobox3.getValue())) {
+			optionPage3 = 0;
+			optionPageStr3 = "X";
+		}
+		else if (olist3.get(1).equals(ocombobox3.getValue())) {
+			optionPage3 = 7;
+			optionPageStr3 = "아보카도";
+		}
+		else if (olist3.get(2).equals(ocombobox3.getValue())) {
+			optionPage3 = 8;
+			optionPageStr3 = "파인애플";
+		}
+		else if (olist3.get(3).equals(ocombobox3.getValue())) {
+			optionPage3 = 9;
+			optionPageStr3 = "피클";
+		}
+		else if (olist3.get(4).equals(ocombobox3.getValue())) {
+			optionPage3 = 10;
+			optionPageStr3 = "할라피뇨";
+		}
+		else if (olist3.get(5).equals(ocombobox3.getValue())) {
+			optionPage3 = 11;
+			optionPageStr3 = "기본 야채 추가";
+		}
+		
+		if(optionPage1 == 99 || optionPage2 == 99 || optionPage3 ==99) {
+			optionNotChoiceWarning();
+		}
+		else {
+			int tmp;
+			optionPrice=0;
+		
+			while (DBConnect.rsp.next()) {
+				optionID = DBConnect.rsp.getInt("optionId");
+				optionName = DBConnect.rsp.getString("optionName");
+				tmp = DBConnect.rsp.getInt("optionPrice");
+				if (optionID == optionPage1) {
+					optionPrice = optionPrice + tmp;
+				}
+				if (optionID == optionPage2) {
+					optionPrice = optionPrice + tmp;
+				}
+				if (optionID == optionPage3) {
+					optionPrice = optionPrice + tmp;
+				}
+			}
+			
+			addMenu(productButtonInfo, optionPrice);
+			
+			ocombobox1.getSelectionModel().selectFirst();
+			ocombobox2.getSelectionModel().selectFirst();
+			ocombobox3.getSelectionModel().selectFirst();
+		}
+		
+    }
+	
+	
+	
+	
+
+	// TableView 값 저장 Method
+	public void addMenu(String n, int oPrice) throws SQLException {
+
+		Iterator<Product> itr = arrayProduct.iterator();
 		DBConnect.test();
 
 		while (itr.hasNext()) {
@@ -297,43 +520,31 @@ public class OrderController implements Initializable {
 			while (DBConnect.rs.next()) {
 				name = DBConnect.rs.getString("name");
 				price = DBConnect.rs.getInt("price");
-				if (name.equals(n)) {
-					Product product = new Product(name, price);
-					t.add(product); // ArrayList 추가
-					ObservableList<Product> products = tableView.getItems();
-					products.add(product);
-					tableView.setItems(products);
-				}
+				categoryID = DBConnect.rs.getInt("categoryId");
+				
+				if (name.equals(n))
+					break;
 			}
+			
+			
+			if (name.equals(n) && categoryID ==2) {
+				Product product = new Product(name, price+oPrice, optionPageStr1, optionPageStr2, optionPageStr3);
+				arrayProduct.add(product); // ArrayList 추가
+				ObservableList<Product> products = tableView.getItems();
+				products.add(product);
+				tableView.setItems(products);
+			}
+			else if (name.equals(n) && categoryID != 2) {
+				Product product = new Product(name, price, "-", "-", "-");
+				arrayProduct.add(product); // ArrayList 추가
+				ObservableList<Product> products = tableView.getItems();
+				products.add(product);
+				tableView.setItems(products);
+			}
+			System.out.println(arrayProduct.get(0).getCount() + " " + arrayProduct.get(0).getName() + " " + arrayProduct.get(0).getOption1() + " " + arrayProduct.get(0).getOption2() + " " + arrayProduct.get(0).getOption3() + " " + arrayProduct.get(0).getPrice());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 }
-
-/*
- * public void testClick() throws Exception { DBConnect.test(); while
- * (DBConnect.rs.next()) { // product = DBConnect.rs.getInt("productId"); //
- * category = DBConnect.rs.getInt("categoryId"); name =
- * DBConnect.rs.getString("name"); price = DBConnect.rs.getInt("price"); if
- * (name.equals("감자튀김")) { t.add(new Product(name, price)); label.setText(name +
- * "\t\t" + price); break; } } }
- */
-
-/*
- * public void test2Click() throws Exception {
- * 
- * DBConnect.test();
- * 
- * Iterator<Product> itr = t.iterator();
- * 
- * while (itr.hasNext()) { Product product = itr.next(); if
- * (product.getName().equals("치즈 감자튀김")) { warning(); return; } }
- * 
- * while (DBConnect.rs.next()) { name = DBConnect.rs.getString("name"); price =
- * DBConnect.rs.getInt("price"); if (name.equals("치즈 감자튀김")) { Product product =
- * new Product(name, price); t.add(product); // ArrayList 추가
- * ObservableList<Product> products = tableView.getItems();
- * products.add(product); } tableView.setItems(products); } }
- */

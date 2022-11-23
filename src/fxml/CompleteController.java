@@ -13,7 +13,7 @@ public class CompleteController {
 	private Button btnComplete;
 	
 	public void complete() throws Exception {
-		OrderController.t.clear(); // 상품 초기화
+		OrderController.arrayProduct.clear(); // 상품 초기화
 		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/FirstPage.fxml"));
 		Scene scene = new Scene(View);
 		Stage primaryStage = (Stage) btnComplete.getScene().getWindow();
