@@ -52,7 +52,6 @@ public class CheckController implements Initializable{
 		option1Column.setCellValueFactory(new PropertyValueFactory<Product, String>("option1"));
 		option2Column.setCellValueFactory(new PropertyValueFactory<Product, String>("option2"));
 		option3Column.setCellValueFactory(new PropertyValueFactory<Product, String>("option3"));
-		
 	}
 	
 	

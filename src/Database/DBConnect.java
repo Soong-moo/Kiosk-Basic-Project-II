@@ -77,9 +77,48 @@ public class DBConnect {
 		
 	}
 	
+	public void getOrderID() {
+		String sql = "SELECT orderID FROM selectData";
+		try {
+			rs = st.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
+	public static boolean insertSelectData(int orderID, int categoryID, int productID, int option1ID, int option2ID, int option3ID) {
+		String sql = "INSERT INTO selectData VALUES ('" + orderID + "' , '" + categoryID + "' , '" + productID + "' , '" + option1ID + "' , '" + option2ID + "' , '" + option3ID +"')";
+		try {
+			st.executeUpdate(sql);	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 	
+	public static boolean insertOrderData(int orderID, int orderPrice, String orderWay, String eatingWay) {
+		String sql = "INSERT INTO orderData VALUES ('" + orderID + "', now() , '" + orderPrice + "', '" + orderWay + "', '" + eatingWay + "')";
+		try {
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 	
+	public static void burgerStatistics() {
+		String sql = "SELECT S.productID AS 상품ID, P.NAME AS 상품이름, COUNT(S.productID) AS 판매량 FROM selectData S JOIN productData P ON S.productID = P.productID WHERE P.categoryID = 2 GROUP BY S.productID ORDER BY COUNT(S.productID) DESC";
+		try {
+			rs = st.executeQuery(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public static void main(String[] args) {
 	//	new DBConnect().connect();

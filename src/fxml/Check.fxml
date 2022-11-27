@@ -12,15 +12,15 @@
    <children>
       <AnchorPane prefHeight="700.0" prefWidth="800.0">
          <children>
-            <Button fx:id="btnPay" layoutX="41.0" layoutY="607.0" mnemonicParsing="false" onAction="#pay" prefHeight="80.0" prefWidth="130.0" text="결제" />
-            <Button fx:id="btnCancel" layoutX="230.0" layoutY="607.0" mnemonicParsing="false" onAction="#cancel" prefHeight="80.0" prefWidth="130.0" text="취소" />
-            <Label alignment="CENTER" prefHeight="100.0" prefWidth="400.0" text="메뉴 확인">
+            <Button fx:id="btnPay" layoutX="512.0" layoutY="592.0" mnemonicParsing="false" onAction="#pay" prefHeight="80.0" prefWidth="130.0" text="결제" />
+            <Button fx:id="btnCancel" layoutX="657.0" layoutY="592.0" mnemonicParsing="false" onAction="#cancel" prefHeight="80.0" prefWidth="130.0" text="취소" />
+            <Label alignment="CENTER" layoutX="200.0" prefHeight="100.0" prefWidth="400.0" text="메뉴 확인">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <Line endX="294.0" layoutX="106.0" layoutY="572.0" startX="-105.99998474121094" />
-           <TableView fx:id="tableView" cache="true" pickOnBounds="false" prefHeight="130.0" prefWidth="600.0">
+            <Line endX="694.0" layoutX="106.0" layoutY="572.0" startX="-105.99998474121094" />
+           <TableView fx:id="tableView" cache="true" layoutY="82.0" pickOnBounds="false" prefHeight="479.0" prefWidth="800.0" stylesheets="@tableViewStyle.css">
               <columns>
                 <TableColumn fx:id="nameColumn" prefWidth="75.0" text="메뉴" />
                 <TableColumn fx:id="priceColumn" prefWidth="75.0" text="가격" />

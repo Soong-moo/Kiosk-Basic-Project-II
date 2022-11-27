@@ -14,10 +14,10 @@ public class PaymentMethodController {
 	@FXML
 	private Button btnSPay;
 	
-	int credit = 0, s = 0;
+	static int credit = 0, s = 0;
 	
 	public void creditCard() throws Exception {
-		credit++; // 결제 수단 파악
+		++credit;
 		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/Complete.fxml"));
 		Scene scene = new Scene(View);
 		Stage primaryStage = (Stage) btnCC.getScene().getWindow();
@@ -26,7 +26,7 @@ public class PaymentMethodController {
 	}
 	
 	public void sPay() throws Exception {
-		s++; // 결제 수단 파악
+		++s;
 		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/Complete.fxml"));
 		Scene scene = new Scene(View);
 		Stage primaryStage = (Stage) btnSPay.getScene().getWindow();

@@ -1,9 +1,12 @@
 package fxml;
 
+import java.net.URL;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -16,7 +19,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class FirstPageController {
+public class FirstPageController implements Initializable {
 
 	@FXML
 	private Button btnPickUp;
@@ -25,10 +28,16 @@ public class FirstPageController {
 	@FXML
 	private Button btnAdmin;
 
-	int pick = 0, take = 0;
+	static int pick = 0, take = 0;
 
+	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		OrderController.arrayProduct.clear(); // 상품 초기화	
+	}
+	
 	public void pickUp() throws Exception {
-		pick++;
+		++pick;
 		Alert a = new Alert(AlertType.CONFIRMATION);
 		if (a.showAndWait().get() == ButtonType.OK) {
 			Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/Order.fxml"));
@@ -40,7 +49,7 @@ public class FirstPageController {
 	}
 
 	public void takeOut() throws Exception {
-		take++;
+		++take;
 		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/Order.fxml"));
 		Scene scene = new Scene(View);
 		Stage primaryStage = (Stage) btnTakeOut.getScene().getWindow();
@@ -66,7 +75,7 @@ public class FirstPageController {
 		}
 
 		if (input.equals("test")) {
-			Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/test.fxml"));
+			Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/Manager.fxml"));
 			Scene scene = new Scene(View);
 			Stage primaryStage = (Stage) btnAdmin.getScene().getWindow();
 			primaryStage.setScene(scene);
@@ -74,22 +83,3 @@ public class FirstPageController {
 		}
 	}
 }
-
-/*
- * String input = null;
- * 
- * TextInputDialog dialog = new TextInputDialog();
- * dialog.setContentText("Please enter your name:");
- * 
- * Optional<String> result = dialog.showAndWait();
- * 
- * if(result.isPresent()) { input = dialog.getEditor().getText(); }
- * 
- * if(input.equals("test")) { Parent View =
- * FXMLLoader.load(getClass().getClassLoader().getResource("fxml/test.fxml"));
- * Scene scene = new Scene(View); Stage primaryStage = (Stage)
- * btnAdmin.getScene().getWindow(); primaryStage.setScene(scene);
- * primaryStage.show(); }
- * 
- * }
- */

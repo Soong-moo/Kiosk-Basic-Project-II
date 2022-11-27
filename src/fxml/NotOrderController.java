@@ -27,22 +27,19 @@ import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import Database.DBConnect;
-import tableView.InsertProduct;
 import tableView.Product;
 /*
  * button 10개정도? categoryId와 버튼을 눌렀을 때 해당하는 제품명 가격 개수 장바구니
  */
 
-public class OrderController implements Initializable {
+public class NotOrderController implements Initializable {
 
-	DBConnect dbc = new DBConnect();
-	
 	@FXML
 	private Button btnOrder; // 주문버튼
 	@FXML
 	private Button bthome;
 	@FXML
-	public Button popular1;
+	private Button popular1;
 	@FXML
 	private Button popular2;
 	@FXML
@@ -99,9 +96,9 @@ public class OrderController implements Initializable {
 	@FXML
 	private Button back; // 음료 뒤 넘김
 	@FXML
-	private Pane pnlBeverageFirst; // 음료 앞 페이지
+	private Pane pnlBeverageFirst;
 	@FXML
-	private Pane pnlBeverageSecond; // 음료 뒷 페이지
+	private Pane pnlBeverageSecond;
 
 	@FXML
 	private Label oLabel1, oLabel2, oLabel3, opInfo1;
@@ -165,16 +162,12 @@ public class OrderController implements Initializable {
 	@FXML
 	private Button updatefamous;
 
-	public static ArrayList<Product> arrayProduct = new ArrayList<>(); // tableView ArrayList
-	public static ArrayList<InsertProduct> arrayInsertProduct = new ArrayList<>(); // INSERT DB ArrayList  
-	
+	public static ArrayList<Product> arrayProduct = new ArrayList<>();
 
 	int i = 0; // i = plus,minus
-	int cnt; // 개수
 	String name;
 	int price;
 	int categoryID;
-	int productID;
 
 	String p_name;
 	int p_price;
@@ -229,6 +222,7 @@ public class OrderController implements Initializable {
 		option1Column.setCellValueFactory(new PropertyValueFactory<Product, String>("option1"));
 		option2Column.setCellValueFactory(new PropertyValueFactory<Product, String>("option2"));
 		option3Column.setCellValueFactory(new PropertyValueFactory<Product, String>("option3"));
+		
         ocombobox1.setItems(olist1);    
         ocombobox2.setItems(olist2);  
         ocombobox3.setItems(olist3); 
@@ -252,7 +246,7 @@ public class OrderController implements Initializable {
 	}
 	
 	public void home() throws Exception {
-		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/FirstPage.fxml"));
+		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/FirstPageFake.fxml"));
 		Scene scene = new Scene(View);
 		Stage primaryStage = (Stage) bthome.getScene().getWindow();
 		primaryStage.setScene(scene);
@@ -280,6 +274,9 @@ public class OrderController implements Initializable {
 
 	// 장바구니
 	public void testClick(ActionEvent event) throws Exception {
+		
+		
+		
 
 		// if(event.getSource() == burger1) return; //선택 방법 1
 
@@ -400,13 +397,12 @@ public class OrderController implements Initializable {
 			Product p = tableView.getSelectionModel().getSelectedItem();
 			ObservableList<Product> products = tableView.getItems();
 			Iterator<Product> itr = arrayProduct.iterator();
-			
+
 			while (itr.hasNext()) {
 				Product exist = itr.next();
 				if (exist.getName().equals(p.getName())) {
-					cnt = exist.getCount();
+					int cnt = exist.getCount();
 					exist.setCount(++cnt);
-					exist.setPrice(exist.getPrice() + price + optionPrice);
 					tableView.getItems().clear();
 					products.addAll(arrayProduct);
 					break;
@@ -428,9 +424,8 @@ public class OrderController implements Initializable {
 			while (itr.hasNext()) {
 				Product exist = itr.next();
 				if (exist.getName().equals(p.getName())) {
-					cnt = exist.getCount();
+					int cnt = exist.getCount();
 					exist.setCount(--cnt);
-					exist.setPrice(exist.getPrice() - price - optionPrice);
 					if (exist.getCount() <= 0) {
 						arrayProduct.remove(i);
 					}
@@ -562,13 +557,13 @@ public class OrderController implements Initializable {
 				optionName = DBConnect.rsp.getString("optionName");
 				tmp = DBConnect.rsp.getInt("optionPrice");
 				if (optionID == optionPage1) {
-					optionPrice += tmp;
+					optionPrice = optionPrice + tmp;
 				}
 				if (optionID == optionPage2) {
-					optionPrice += tmp;
+					optionPrice = optionPrice + tmp;
 				}
 				if (optionID == optionPage3) {
-					optionPrice += tmp;
+					optionPrice = optionPrice + tmp;
 				}
 			}
 			
@@ -580,15 +575,17 @@ public class OrderController implements Initializable {
 		}
 		
     }
+	
+	
+	
+	
 
 	// TableView 값 저장 Method
 	public void addMenu(String n, int oPrice) throws SQLException {
-		
-		int orderID = 0;
-		
+
 		Iterator<Product> itr = arrayProduct.iterator();
 		DBConnect.test();
-		
+
 		while (itr.hasNext()) {
 			Product product = itr.next();
 			if (product.getName().equals(n)) {
@@ -602,32 +599,22 @@ public class OrderController implements Initializable {
 				name = DBConnect.rs.getString("name");
 				price = DBConnect.rs.getInt("price");
 				categoryID = DBConnect.rs.getInt("categoryId");
-				productID = DBConnect.rs.getInt("productId");
+				
 				if (name.equals(n))
 					break;
-			}
-			
-			dbc.getOrderID();
-			
-			while(dbc.rs.next()) {
-				orderID = dbc.rs.getInt("orderID");
 			}
 			
 			
 			if (name.equals(n) && categoryID ==2) {
 				Product product = new Product(name, price+oPrice, optionPageStr1, optionPageStr2, optionPageStr3);
-				InsertProduct insertProduct = new InsertProduct(orderID + 1, categoryID, productID, optionPage1, optionPage2, optionPage3);
 				arrayProduct.add(product); // ArrayList 추가
-				arrayInsertProduct.add(insertProduct); // insert ArrayList
 				ObservableList<Product> products = tableView.getItems();
 				products.add(product);
 				tableView.setItems(products);
 			}
 			else if (name.equals(n) && categoryID != 2) {
 				Product product = new Product(name, price, "-", "-", "-");
-				InsertProduct insertProduct = new InsertProduct(orderID + 1, categoryID, productID, 0, 0, 0);
 				arrayProduct.add(product); // ArrayList 추가
-				arrayInsertProduct.add(insertProduct); // insert ArrayList
 				ObservableList<Product> products = tableView.getItems();
 				products.add(product);
 				tableView.setItems(products);

@@ -10,9 +10,7 @@ import Database.DBConnect;
 
 public class Start extends Application {
 	
-
-	
-	
+	static int orderNo = 0;
 	@Override
 	public void start(Stage primaryStage) {
 		try {

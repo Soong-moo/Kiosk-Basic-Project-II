@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.StatisticController">
+   <children>
+      <AnchorPane layoutY="-6.0" prefHeight="700.0" prefWidth="800.0">
+         <children>
+            <TabPane layoutX="483.0" layoutY="289.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" />
+            <Button fx:id="btnoexit" layoutX="47.0" layoutY="528.0" mnemonicParsing="false" onAction="#exit" text="뒤로가기" />
+            <TableView fx:id="tableView" layoutX="32.0" layoutY="36.0" prefHeight="321.0" prefWidth="738.0" stylesheets="@tableViewStyle.css">
+              <columns>
+                <TableColumn fx:id="nameColumn" prefWidth="361.5999755859375" text="hamburger" />
+                  <TableColumn fx:id="countColumn" prefWidth="371.20001220703125" text="판매량" />
+              </columns>
+            </TableView>
+         </children></AnchorPane>
+   </children>
+</AnchorPane>
