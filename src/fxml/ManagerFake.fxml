@@ -1,59 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.ManagerControllerFake">
    <children>
+      <ImageView fitHeight="710.0" fitWidth="810.0">
+         <image>
+            <Image url="@../img/관리자%20페이지%201.png" />
+         </image>
+      </ImageView>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="700.0" prefWidth="800.0">
          <children>
-            <Label layoutX="282.0" layoutY="30.0" text="관리자 모드" textAlignment="CENTER">
-               <font>
-                  <Font size="45.0" />
-               </font>
-            </Label>
-            <Button fx:id="btsalesvolume" layoutX="319.0" layoutY="331.0" mnemonicParsing="false" onAction="#salesvolume" prefHeight="54.0" prefWidth="162.0" text="판매량">
+            <Button fx:id="btsalesvolume" layoutX="309.0" layoutY="321.0" mnemonicParsing="false" onAction="#salesvolume" prefHeight="62.0" prefWidth="171.0" stylesheets="@ClearButton.css" text="판매량">
                <font>
                   <Font size="29.0" />
                </font>
             </Button>
-            <Button fx:id="btnotorderable" layoutX="319.0" layoutY="448.0" mnemonicParsing="false" onAction="#notorderable" text="상태 변경">
+            <Button fx:id="btnotorderable" layoutX="309.0" layoutY="442.0" mnemonicParsing="false" onAction="#notorderable" prefHeight="62.0" prefWidth="171.0" stylesheets="@ClearButton.css" text="상태 변경">
                <font>
                   <Font size="29.0" />
                </font>
             </Button>
-            <Button fx:id="btadjustmenu" layoutX="319.0" layoutY="216.0" mnemonicParsing="false" text="메뉴 조정">
+            <Button fx:id="btadjustmenu" layoutX="309.0" layoutY="203.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="171.0" stylesheets="@ClearButton.css" text="메뉴 조정">
                <font>
                   <Font size="29.0" />
                </font>
             </Button>
-            <Button fx:id="btexit" layoutX="315.0" layoutY="650.0" mnemonicParsing="false" onAction="#exitmanager" prefHeight="28.0" prefWidth="177.0" text="관리자 모드 종료" />
-            <Button fx:id="popUpdatebutton" layoutX="173.0" layoutY="347.0" mnemonicParsing="false" text="인기상품최신화" />
+            <Button fx:id="btexit" layoutX="312.0" layoutY="650.0" mnemonicParsing="false" onAction="#exitmanager" prefHeight="28.0" prefWidth="164.0" stylesheets="@ClearButton.css" text="관리자 모드 종료" />
+            <Button fx:id="popUpdatebutton" layoutX="163.0" layoutY="336.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="108.0" stylesheets="@ClearButton.css" text="인기상품최신화" />
+            <Button fx:id="btadjustmenu" layoutX="309.0" layoutY="203.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="171.0" stylesheets="@ClearButton.css" text="메뉴 조정">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Button>
+            <Button fx:id="btsalesvolume" layoutX="309.0" layoutY="321.0" mnemonicParsing="false" onAction="#salesvolume" prefHeight="62.0" prefWidth="171.0" stylesheets="@ClearButton.css" text="판매량">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnotorderable" layoutX="309.0" layoutY="442.0" mnemonicParsing="false" onAction="#notorderable" prefHeight="62.0" prefWidth="171.0" stylesheets="@ClearButton.css" text="상태 변경">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Button>
+            <Button fx:id="popUpdatebutton" layoutX="163.0" layoutY="335.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="108.0" stylesheets="@ClearButton.css" text="인기상품최신화" />
+            <Button fx:id="btexit" layoutX="312.0" layoutY="650.0" mnemonicParsing="false" onAction="#exitmanager" prefHeight="28.0" prefWidth="164.0" stylesheets="@ClearButton.css" text="관리자 모드 종료" />
          </children>
       </AnchorPane>
-      <Label layoutX="292.0" layoutY="40.0" text="관리자 모드" textAlignment="CENTER">
-         <font>
-            <Font size="45.0" />
-         </font>
-      </Label>
-      <Button fx:id="btsalesvolume" layoutX="329.0" layoutY="341.0" mnemonicParsing="false" onAction="#salesvolume" prefHeight="54.0" prefWidth="162.0" text="판매량">
-         <font>
-            <Font size="29.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnotorderable" layoutX="329.0" layoutY="458.0" mnemonicParsing="false" onAction="#notorderable" text="상태 변경">
-         <font>
-            <Font size="29.0" />
-         </font>
-      </Button>
-      <Button fx:id="btadjustmenu" layoutX="329.0" layoutY="226.0" mnemonicParsing="false" text="메뉴 조정">
-         <font>
-            <Font size="29.0" />
-         </font>
-      </Button>
-      <Button fx:id="btexit" layoutX="325.0" layoutY="660.0" mnemonicParsing="false" onAction="#exitmanager" prefHeight="28.0" prefWidth="177.0" text="관리자 모드 종료" />
-      <Button fx:id="popUpdatebutton" layoutX="183.0" layoutY="357.0" mnemonicParsing="false" text="인기상품최신화" />
    </children>
 </AnchorPane>

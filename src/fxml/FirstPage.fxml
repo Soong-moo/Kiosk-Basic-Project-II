@@ -9,11 +9,11 @@
    <children>
       <ImageView fitHeight="700.0" fitWidth="800.0">
          <image>
-            <Image url="@../img/매장%20포장%20주문%20페이지1.png" />
+            <Image url="@../img/매장포장%20선택%20페이지%201.png" />
          </image>
       </ImageView>
       <Button fx:id="btnAdmin" layoutX="334.0" layoutY="651.0" mnemonicParsing="false" onAction="#connectAdmin" prefHeight="34.0" prefWidth="132.0" stylesheets="@ClearButton.css" text="관리자 접속" textFill="TRANSPARENT" />
-      <Button fx:id="btnPickUp" layoutX="431.0" layoutY="229.0" mnemonicParsing="false" onAction="#pickUp" prefHeight="363.0" prefWidth="353.0" stylesheets="@ClearButton.css" text="매장" textFill="TRANSPARENT" />
-      <Button fx:id="btnTakeOut" layoutX="18.0" layoutY="229.0" mnemonicParsing="false" onAction="#takeOut" prefHeight="363.0" prefWidth="353.0" stylesheets="@ClearButton.css" text="포장" textFill="TRANSPARENT" />
+      <Button fx:id="btnTakeOut" layoutX="431.0" layoutY="229.0" mnemonicParsing="false" onAction="#takeOut" prefHeight="363.0" prefWidth="353.0" stylesheets="@ClearButton.css" text="포장" textFill="TRANSPARENT" />
+      <Button fx:id="btnPickUp" layoutX="18.0" layoutY="229.0" mnemonicParsing="false" onAction="#pickUp" prefHeight="363.0" prefWidth="353.0" stylesheets="@ClearButton.css" text="매장" textFill="TRANSPARENT" />
    </children>
 </AnchorPane>

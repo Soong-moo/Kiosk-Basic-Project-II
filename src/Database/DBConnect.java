@@ -35,7 +35,7 @@ public class DBConnect {
 
 			// @param getConnection(url, userName, password);
 			// @return Connection
-			con = DriverManager.getConnection(url, "test", "test");
+			con = DriverManager.getConnection(url, "root", "dltkddyd428*");
 			st = con.createStatement();
 			stp = con.createStatement();
 			//stp = conp.createStatement();
@@ -110,15 +110,54 @@ public class DBConnect {
 		}
 		return true;
 	}
-	
+	//햄버거 통계량
 	public static void burgerStatistics() {
-		String sql = "SELECT S.productID AS 상품ID, P.NAME AS 상품이름, COUNT(S.productID) AS 판매량 FROM selectData S JOIN productData P ON S.productID = P.productID WHERE P.categoryID = 2 GROUP BY S.productID ORDER BY COUNT(S.productID) DESC";
+		String sql = "SELECT S.productID AS 상품ID, P.NAME AS 상품이름, SUM(S.number) AS 판매량 FROM selectData S JOIN productData P ON S.productID = P.productID WHERE S.categoryID = 2 GROUP BY S.productID ORDER BY SUM(S.number) DESC";
 		try {
 			rs = st.executeQuery(sql);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
+	//option통계량
+	public static void optionsStatistics() {
+		String sql = "SELECT O.optionNAME AS 옵션이름, SUM(S.number) AS 판매량 FROM selectData S JOIN optionData O ON O.optionName NOT LIKE '선택안함' AND S.option1ID = O.optionID OR S.option2ID = O.optionID OR S.option3ID = O.optionID WHERE S.categoryID = 2 GROUP BY O.optionNAME order by SUM(S.number) DESC";
+		try {
+			rs = st.executeQuery(sql);
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	//option1통계량
+	public static void option1Statistics() {
+		String sql = "SELECT O.optionNAME AS 옵션1이름, SUM(S.number) AS 판매량 FROM selectData S JOIN optionData O ON O.optionName NOT LIKE '선택안함' WHERE S.categoryID = 2  AND S.option1ID = O.optionID GROUP BY O.optionNAME order by SUM(S.number) DESC";
+		try {
+			rs = st.executeQuery(sql);
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	//option2통계량
+	public static void option2Statistics() {
+		String sql = "SELECT O.optionNAME AS 옵션2이름, SUM(S.number) AS 판매량 FROM selectData S JOIN optionData O ON O.optionName NOT LIKE '선택안함' WHERE S.categoryID = 2  AND S.option2ID = O.optionID GROUP BY O.optionNAME order by SUM(S.number) DESC";
+		try {
+			rs = st.executeQuery(sql);
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	//option3통계량
+	public static void option3Statistics() {
+		String sql ="SELECT O.optionNAME AS 옵션3이름, SUM(S.number) AS 판매량 FROM selectData S JOIN optionData O ON O.optionName NOT LIKE '선택안함' WHERE S.categoryID = 2 AND S.option3ID = O.optionID GROUP BY O.optionNAME order by SUM(S.number) DESC";
+		try {
+			rs = st.executeQuery(sql);
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}	
+	}
+	
+	
+	
 	
 	public static void main(String[] args) {
 	//	new DBConnect().connect();

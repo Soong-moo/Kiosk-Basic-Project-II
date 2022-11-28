@@ -192,8 +192,11 @@ public class OrderController implements Initializable {
 	String  optionName;
 	int optionPrice=0;
 	
+	
+	StatisticController s = new StatisticController();
+	
 	//인기상품 예시 -> db에서 통계량 뽑아서 넣어야함//
-	public String h = "cheese";
+	//public String h;
 	public String o1 = "meat";
 	public String o2 = "tomato";
 	public String o3 = "njtl";
@@ -219,6 +222,7 @@ public class OrderController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		t();
 		ObservableList<Product> products = tableView.getItems();
 		products.addAll(arrayProduct);
 		tableView.setItems(products);
@@ -231,7 +235,22 @@ public class OrderController implements Initializable {
 		option3Column.setCellValueFactory(new PropertyValueFactory<Product, String>("option3"));
         ocombobox1.setItems(olist1);    
         ocombobox2.setItems(olist2);  
-        ocombobox3.setItems(olist3); 
+        ocombobox3.setItems(olist3);
+        FemptyH.setText(s.productStatistics.get(0).getName());
+        FemptyO1.setText(s.option1Array.get(0).getName());
+        FemptyO2.setText(s.option2Array.get(0).getName());
+        FemptyO3.setText(s.option3Array.get(0).getName());
+        
+        FemptyH1.setText(s.productStatistics.get(1).getName());
+        FemptyO11.setText(s.option1Array.get(1).getName());
+        FemptyO21.setText(s.option2Array.get(1).getName());
+        FemptyO31.setText(s.option3Array.get(1).getName());
+        
+//        FemptyH2.setText(s.productStatistics.get(2).getName());
+//        FemptyO12.setText(s.option1Array.get(2).getName());
+//        FemptyO22.setText(s.option2Array.get(2).getName());
+//        FemptyO32.setText(s.option3Array.get(2).getName());
+
 	}
 /*
     //옵션 change
@@ -261,20 +280,20 @@ public class OrderController implements Initializable {
 	
 	//인기상품 라벨에 메뉴넣는 메소드
 		public void PopularHambuger1(ActionEvent e) {
-			FemptyH.setText(h);
-			FemptyO1.setText(o1);
-			FemptyO2.setText(o2);
-			FemptyO3.setText(o3);
-			
-			FemptyH1.setText(h1);
-			FemptyO11.setText(o11);
-			FemptyO21.setText(o21);
-			FemptyO31.setText(o31);
-			
-			FemptyH2.setText(h2);
-			FemptyO12.setText(o12);
-			FemptyO22.setText(o22);
-			FemptyO32.setText(o32);
+//			//FemptyH.setText(h);
+//			FemptyO1.setText(o1);
+//			FemptyO2.setText(o2);
+//			FemptyO3.setText(o3);
+//			
+//			FemptyH1.setText(h1);
+//			FemptyO11.setText(o11);
+//			FemptyO21.setText(o21);
+//			FemptyO31.setText(o31);
+//			
+//			FemptyH2.setText(h2);
+//			FemptyO12.setText(o12);
+//			FemptyO22.setText(o22);
+//			FemptyO32.setText(o32);
 		}
 	
 
@@ -388,7 +407,7 @@ public class OrderController implements Initializable {
 
 	public void changeScene(ActionEvent event) {
 		if (event.getSource() == next) {
-			pnlBeverageSecond.toFront();
+			pnlBeverageFirst.toBack();
 		} else if (event.getSource() == back) {
 			pnlBeverageFirst.toFront();
 		}
@@ -400,13 +419,13 @@ public class OrderController implements Initializable {
 			Product p = tableView.getSelectionModel().getSelectedItem();
 			ObservableList<Product> products = tableView.getItems();
 			Iterator<Product> itr = arrayProduct.iterator();
-			
+
 			while (itr.hasNext()) {
 				Product exist = itr.next();
 				if (exist.getName().equals(p.getName())) {
 					cnt = exist.getCount();
 					exist.setCount(++cnt);
-					exist.setPrice(exist.getPrice() + price + optionPrice);
+					exist.setPrice(exist.getPrice() + (exist.getPrice()/(cnt-1)));
 					tableView.getItems().clear();
 					products.addAll(arrayProduct);
 					break;
@@ -430,7 +449,7 @@ public class OrderController implements Initializable {
 				if (exist.getName().equals(p.getName())) {
 					cnt = exist.getCount();
 					exist.setCount(--cnt);
-					exist.setPrice(exist.getPrice() - price - optionPrice);
+					exist.setPrice(exist.getPrice() - (exist.getPrice()/(cnt+1)));
 					if (exist.getCount() <= 0) {
 						arrayProduct.remove(i);
 					}
@@ -635,6 +654,10 @@ public class OrderController implements Initializable {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void t() {
+		s.test();
 	}
 
 }

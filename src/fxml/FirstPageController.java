@@ -38,14 +38,12 @@ public class FirstPageController implements Initializable {
 	
 	public void pickUp() throws Exception {
 		++pick;
-		Alert a = new Alert(AlertType.CONFIRMATION);
-		if (a.showAndWait().get() == ButtonType.OK) {
 			Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/Order.fxml"));
 			Scene scene = new Scene(View);
 			Stage primaryStage = (Stage) btnPickUp.getScene().getWindow();
 			primaryStage.setScene(scene);
 			primaryStage.show();
-		}
+		
 	}
 
 	public void takeOut() throws Exception {

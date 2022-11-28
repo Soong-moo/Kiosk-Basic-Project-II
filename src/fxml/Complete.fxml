@@ -4,21 +4,20 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.CompleteController">
    <children>
+      <ImageView fitHeight="700.0" fitWidth="800.0">
+         <image>
+            <Image url="@../img/결제%20완료%20페이지1.png" />
+         </image>
+      </ImageView>
       <AnchorPane prefHeight="700.0" prefWidth="800.0">
          <children>
-            <Label alignment="CENTER" prefHeight="100.0" prefWidth="800.0" text="결제 완료">
-               <font>
-                  <Font name="System Bold Italic" size="30.0" />
-               </font>
-            </Label>
-            <Line endX="699.0" endY="7.62939453125E-6" layoutX="101.0" layoutY="100.0" startX="-100.0" />
-            <Button fx:id="btnComplete" layoutX="627.0" layoutY="576.0" mnemonicParsing="false" onAction="#complete" prefHeight="89.0" prefWidth="140.0" text="완료" />
+            <Button fx:id="btnComplete" layoutX="622.0" layoutY="579.0" mnemonicParsing="false" onAction="#complete" prefHeight="93.0" prefWidth="148.0" stylesheets="@ClearButton.css" text="완료" />
             <TableView fx:id="tableView" cache="true" layoutX="27.0" layoutY="173.0" pickOnBounds="false" prefHeight="300.0" prefWidth="745.0" stylesheets="@tableViewStyle.css">
                <columns>
                   <TableColumn fx:id="nameColumn" prefWidth="75.0" text="메뉴" />

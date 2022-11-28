@@ -28,7 +28,7 @@ public class ManagerController {
 	//private Parent root;
 	
 	
-/*	public void adjustmenu() throws Exception {
+	/*public void adjustmenu() throws Exception {
 		
 		// TODO Auto-generated method stub
 		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/FirstPage.fxml"));

@@ -122,6 +122,14 @@ public class CompleteController implements Initializable {
 		lbEatingWay.setText(eatingWay);
 		lbPrice.setText(String.format("%d", price));
 		lbOrderNo.setText(String.format("%04d", ++orderNum));
+		
+		//선택 방법 초기화
+		FirstPageController.pick = 0;
+		FirstPageController.take = 0;
+		
+		//결제 방법 초기화
+		PaymentMethodController.credit = 0;
+		PaymentMethodController.s = 0;
 	}
 	
 	public void complete() throws Exception {
