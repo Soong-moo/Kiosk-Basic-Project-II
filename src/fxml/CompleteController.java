@@ -105,7 +105,8 @@ public class CompleteController implements Initializable {
 					arrayInsertProduct.get(i).getProductID(),
 					arrayInsertProduct.get(i).getOption1ID(),
 					arrayInsertProduct.get(i).getOption2ID(),
-					arrayInsertProduct.get(i).getOption3ID());
+					arrayInsertProduct.get(i).getOption3ID(),
+					arrayInsertProduct.get(i).getNumber());
 		}
 		
 		ObservableList<Product> products = tableView.getItems();

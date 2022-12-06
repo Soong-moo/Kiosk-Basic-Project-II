@@ -9,16 +9,27 @@ public class InsertProduct {
 	int option2ID;
 	int option3ID;
 	
-	public InsertProduct(int orderID, int categoryID, int productID, int option1ID, int option2ID, int option3ID) {
+	int number;
+	
+	public InsertProduct(int orderID, int categoryID, int productID, int option1ID, int option2ID, int option3ID, int number) {
 		this.orderID = orderID;
 		this.categoryID = categoryID;
 		this.productID = productID;
 		this.option1ID = option1ID;
 		this.option2ID = option2ID;
 		this.option3ID = option3ID;
+		this.number = number;
 		
 	}
 	
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
 	public int getOrderID() {
 		return orderID;
 	}

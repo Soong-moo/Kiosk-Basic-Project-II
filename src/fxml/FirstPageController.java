@@ -9,8 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
@@ -38,11 +36,11 @@ public class FirstPageController implements Initializable {
 	
 	public void pickUp() throws Exception {
 		++pick;
-			Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/Order.fxml"));
-			Scene scene = new Scene(View);
-			Stage primaryStage = (Stage) btnPickUp.getScene().getWindow();
-			primaryStage.setScene(scene);
-			primaryStage.show();
+		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/Order.fxml"));
+		Scene scene = new Scene(View);
+		Stage primaryStage = (Stage) btnPickUp.getScene().getWindow();
+		primaryStage.setScene(scene);
+		primaryStage.show();
 		
 	}
 
