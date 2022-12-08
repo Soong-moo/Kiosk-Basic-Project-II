@@ -28,19 +28,19 @@
             <Image url="@../img/상품%20페이지%201-1.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="optionPane" layoutX="405.0" layoutY="-1.0" prefHeight="536.0" prefWidth="402.0">
+      <AnchorPane layoutX="405.0" layoutY="-1.0" prefHeight="536.0" prefWidth="402.0">
          <children>
             <ImageView fitHeight="545.0" fitWidth="402.0" layoutY="1.0">
                <image>
                   <Image url="@../img/상품%20페이지%202-1.png" />
                </image>
             </ImageView>
-            <ComboBox fx:id="ocombobox1" layoutX="182.0" layoutY="188.0" prefHeight="52.0" prefWidth="153.0" promptText="선택 안함" style="-fx-background-color: #ffff;" />
-            <ComboBox fx:id="ocombobox2" layoutX="182.0" layoutY="277.0" prefHeight="52.0" prefWidth="153.0" promptText="선택 안함" style="-fx-background-color: #ffff;" />
-            <ComboBox fx:id="ocombobox3" layoutX="182.0" layoutY="366.0" prefHeight="52.0" prefWidth="153.0" promptText="선택 안함" style="-fx-background-color: #ffff;" />
-            <Button fx:id="obutton1" layoutX="45.0" layoutY="458.0" mnemonicParsing="false" onAction="#optionOrder1" prefHeight="70.0" prefWidth="153.0" stylesheets="@ClearButton.css" text="모두 선택 안함" textFill="TRANSPARENT" />
-            <Button fx:id="obutton2" layoutX="217.0" layoutY="458.0" mnemonicParsing="false" onAction="#optionOrder2" prefHeight="70.0" prefWidth="153.0" stylesheets="@ClearButton.css" text="선택 완료" textFill="TRANSPARENT" />
-            <Label fx:id="opInfo1" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="126.0" prefHeight="37.0" prefWidth="390.0" text="상품 정보" textAlignment="CENTER" textFill="RED">
+            <ComboBox fx:id="ocombobox1" layoutX="182.0" layoutY="188.0" prefHeight="52.0" prefWidth="153.0" promptText="선택해주세요" style="-fx-background-color: #ffff;" />
+            <ComboBox fx:id="ocombobox2" layoutX="182.0" layoutY="277.0" prefHeight="52.0" prefWidth="153.0" promptText="선택해주세요" style="-fx-background-color: #ffff;" />
+            <ComboBox fx:id="ocombobox3" layoutX="182.0" layoutY="366.0" prefHeight="52.0" prefWidth="153.0" promptText="선택해주세요" style="-fx-background-color: #ffff;" />
+            <Button fx:id="notOption" layoutX="45.0" layoutY="458.0" mnemonicParsing="false" onAction="#optionOrder1" prefHeight="70.0" prefWidth="153.0" stylesheets="@ClearButton.css" text="모두 선택 안함" textFill="TRANSPARENT" />
+            <Button fx:id="optionChoice" layoutX="217.0" layoutY="458.0" mnemonicParsing="false" onAction="#optionOrder2" prefHeight="70.0" prefWidth="153.0" stylesheets="@ClearButton.css" text="선택 완료" textFill="TRANSPARENT" />
+            <Label fx:id="burgerOption" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="126.0" prefHeight="37.0" prefWidth="390.0" text="상품 정보" textAlignment="CENTER" textFill="RED">
                <font>
                   <Font size="31.0" />
                </font>
@@ -68,33 +68,34 @@
                               <Image url="@../img/인기1등.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="popular1" onAction="#testClick" alignment="BOTTOM_CENTER" layoutX="19.0" layoutY="27.0" mnemonicParsing="false" prefHeight="123.0" prefWidth="104.0" stylesheets="@application.css" text="인기없음1" textAlignment="CENTER" />
-                        <Button fx:id="popular2" alignment="BOTTOM_CENTER" layoutX="20.0" layoutY="160.0" mnemonicParsing="false" prefHeight="124.0" prefWidth="102.0" text="인기없음2" />
-                        <Button fx:id="popular3" alignment="BOTTOM_CENTER" layoutX="20.0" layoutY="293.0" mnemonicParsing="false" prefHeight="124.0" prefWidth="102.0" text="인기없음3" />
-                        <Label fx:id="famousH" layoutX="130.0" layoutY="41.0" text="인기햄버거 : " />
-                        <Label fx:id="famousO1" layoutX="136.0" layoutY="65.0" text="인기옵션1 : " />
-                        <Label fx:id="famousO2" layoutX="135.0" layoutY="92.0" text="인기옵션2 : " />
-                        <Label fx:id="famousO3" layoutX="135.0" layoutY="116.0" text="인기옵션3 : " />
-                        <Label fx:id="famousH1" layoutX="132.0" layoutY="177.0" text="인기햄버거 : " />
-                        <Label fx:id="famousO11" layoutX="136.0" layoutY="201.0" text="인기옵션1 : " />
-                        <Label fx:id="famousO21" layoutX="135.0" layoutY="228.0" text="인기옵션2 : " />
-                        <Label fx:id="famousO31" layoutX="135.0" layoutY="252.0" text="인기옵션3 : " />
-                        <Label fx:id="famousH2" layoutX="131.0" layoutY="310.0" text="인기햄버거 : " />
-                        <Label fx:id="famousO12" layoutX="135.0" layoutY="334.0" text="인기옵션1 : " />
-                        <Label fx:id="famousO22" layoutX="134.0" layoutY="361.0" text="인기옵션2 : " />
-                        <Label fx:id="famousO32" layoutX="134.0" layoutY="385.0" text="인기옵션3 : " />
-                        <Label fx:id="FemptyH" layoutX="257.0" layoutY="41.0" />
-                        <Label fx:id="FemptyO1" layoutX="257.0" layoutY="65.0" />
-                        <Label fx:id="FemptyO2" layoutX="257.0" layoutY="92.0" />
-                        <Label fx:id="FemptyO3" layoutX="257.0" layoutY="116.0" />
-                        <Label fx:id="FemptyH1" layoutX="257.0" layoutY="177.0" />
-                        <Label fx:id="FemptyO11" layoutX="257.0" layoutY="201.0" />
-                        <Label fx:id="FemptyO21" layoutX="257.0" layoutY="228.0" />
-                        <Label fx:id="FemptyO31" layoutX="257.0" layoutY="252.0" />
-                        <Label fx:id="FemptyH2" layoutX="257.0" layoutY="310.0" />
-                        <Label fx:id="FemptyO12" layoutX="257.0" layoutY="334.0" />
-                        <Label fx:id="FemptyO22" layoutX="257.0" layoutY="361.0" />
-                        <Label fx:id="FemptyO32" layoutX="257.0" layoutY="385.0" />
+                        <Button fx:id="popular1" alignment="BOTTOM_CENTER" layoutX="19.0" layoutY="27.0" mnemonicParsing="false" onAction="#checkPopular1" prefHeight="123.0" prefWidth="104.0" stylesheets="@application.css" text="인기없음1" textAlignment="CENTER" />
+                        <Button fx:id="popular2" alignment="BOTTOM_CENTER" layoutX="20.0" layoutY="160.0" mnemonicParsing="false" onAction="#checkPopular2" prefHeight="124.0" prefWidth="102.0" text="인기없음2" />
+                        <Button fx:id="popular3" alignment="BOTTOM_CENTER" layoutX="20.0" layoutY="293.0" mnemonicParsing="false" onAction="#checkPopular3" prefHeight="124.0" prefWidth="102.0" text="인기없음3" />
+                        <Label layoutX="130.0" layoutY="41.0" text="인기햄버거 : " />
+                        <Label layoutX="136.0" layoutY="65.0" text="인기옵션1 : " />
+                        <Label layoutX="135.0" layoutY="92.0" text="인기옵션2 : " />
+                        <Label layoutX="135.0" layoutY="116.0" text="인기옵션3 : " />
+                        <Label layoutX="132.0" layoutY="177.0" text="인기햄버거 : " />
+                        <Label layoutX="136.0" layoutY="201.0" text="인기옵션1 : " />
+                        <Label layoutX="135.0" layoutY="228.0" text="인기옵션2 : " />
+                        <Label layoutX="135.0" layoutY="252.0" text="인기옵션3 : " />
+                        <Label layoutX="131.0" layoutY="310.0" text="인기햄버거 : " />
+                        <Label layoutX="135.0" layoutY="334.0" text="인기옵션1 : " />
+                        <Label layoutX="134.0" layoutY="361.0" text="인기옵션2 : " />
+                        <Label layoutX="134.0" layoutY="385.0" text="인기옵션3 : " />
+                        <Label fx:id="burgerRank1" layoutX="257.0" layoutY="41.0" />
+                        <Label fx:id="option1Rank1" layoutX="257.0" layoutY="65.0" />
+                        <Label fx:id="option2Rank1" layoutX="257.0" layoutY="92.0" />
+                        <Label fx:id="option3Rank1" layoutX="257.0" layoutY="116.0" />
+                        <Label fx:id="burgerRank2" layoutX="257.0" layoutY="177.0" />
+                        <Label fx:id="option1Rank2" layoutX="257.0" layoutY="201.0" />
+                        <Label fx:id="option2Rank2" layoutX="257.0" layoutY="228.0" />
+                        <Label fx:id="option3Rank2" layoutX="257.0" layoutY="252.0" />
+                        <Label fx:id="burgerRank3" layoutX="257.0" layoutY="310.0" />
+                        <Label fx:id="option1Rank3" layoutX="257.0" layoutY="334.0" />
+                        <Label fx:id="option2Rank3" layoutX="257.0" layoutY="361.0" />
+                        <Label fx:id="option3Rank3" layoutX="257.0" layoutY="385.0" />
+                        <AnchorPane layoutX="264.0" layoutY="-1.0" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #B1D3C5;" />
                      </children>
                   </AnchorPane>
                </content></Tab>
@@ -107,10 +108,10 @@
                               <Image url="@../img/상품%20페이지%20-햄버거1.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="burger1" alignment="BOTTOM_CENTER" layoutX="16.0" layoutY="21.0" mnemonicParsing="false" onAction="#testClick" prefHeight="116.0" prefWidth="99.0" stylesheets="@application.css" text="치-즈" textAlignment="CENTER" />
-                        <Button fx:id="burger2" alignment="BOTTOM_CENTER" layoutX="151.0" layoutY="21.0" mnemonicParsing="false" onAction="#testClick" prefHeight="116.0" prefWidth="99.0" text="취-킨" />
-                        <Button fx:id="burger3" alignment="BOTTOM_CENTER" layoutX="288.0" layoutY="21.0" mnemonicParsing="false" onAction="#testClick" prefHeight="116.0" prefWidth="101.0" text="불고긔" />
-                        <Button fx:id="burger4" alignment="BOTTOM_CENTER" layoutX="14.0" layoutY="159.0" mnemonicParsing="false" onAction="#testClick" prefHeight="116.0" prefWidth="101.0" stylesheets="@application.css" text="씨우~" textAlignment="CENTER" />
+                        <Button fx:id="burger1" alignment="BOTTOM_CENTER" layoutX="16.0" layoutY="21.0" mnemonicParsing="false" onAction="#menuClick" prefHeight="116.0" prefWidth="99.0" stylesheets="@application.css" text="치-즈" textAlignment="CENTER" />
+                        <Button fx:id="burger2" alignment="BOTTOM_CENTER" layoutX="151.0" layoutY="21.0" mnemonicParsing="false" onAction="#menuClick" prefHeight="116.0" prefWidth="99.0" text="취-킨" />
+                        <Button fx:id="burger3" alignment="BOTTOM_CENTER" layoutX="288.0" layoutY="21.0" mnemonicParsing="false" onAction="#menuClick" prefHeight="116.0" prefWidth="101.0" text="불고긔" />
+                        <Button fx:id="burger4" alignment="BOTTOM_CENTER" layoutX="14.0" layoutY="159.0" mnemonicParsing="false" onAction="#menuClick" prefHeight="116.0" prefWidth="101.0" stylesheets="@application.css" text="씨우~" textAlignment="CENTER" />
                      </children>
                   </AnchorPane>
                </content></Tab>
@@ -123,12 +124,12 @@
                               <Image url="@../img/상품%20페이지%20-사이드1.png" />
                            </image>
                         </ImageView>
-                     <Button fx:id="side1" alignment="BOTTOM_CENTER" layoutX="15.0" layoutY="21.0" mnemonicParsing="false" onAction="#testClick" prefHeight="105.0" prefWidth="102.0" stylesheets="@application.css" text="감튀" textAlignment="CENTER" />
-                        <Button fx:id="side2" alignment="BOTTOM_CENTER" layoutX="150.0" layoutY="20.0" mnemonicParsing="false" onAction="#testClick" prefHeight="104.0" prefWidth="99.0" text="치감튀" />
-                        <Button fx:id="side3" alignment="BOTTOM_CENTER" layoutX="288.0" layoutY="21.0" mnemonicParsing="false" onAction="#testClick" prefHeight="103.0" prefWidth="98.0" text="베치감튀" />
-                        <Button fx:id="side4" alignment="BOTTOM_CENTER" layoutX="15.0" layoutY="147.0" mnemonicParsing="false" onAction="#testClick" prefHeight="105.0" prefWidth="100.0" stylesheets="@application.css" text="스치감튀" textAlignment="CENTER" />
-                        <Button fx:id="side5" alignment="BOTTOM_CENTER" layoutX="150.0" layoutY="147.0" mnemonicParsing="false" onAction="#testClick" prefHeight="104.0" prefWidth="102.0" stylesheets="@application.css" text="치텐" textAlignment="CENTER" />
-                        <Button fx:id="side6" alignment="BOTTOM_CENTER" layoutX="286.0" layoutY="147.0" mnemonicParsing="false" onAction="#testClick" prefHeight="105.0" prefWidth="101.0" stylesheets="@application.css" text="치볼" textAlignment="CENTER" />
+                     <Button fx:id="side1" alignment="BOTTOM_CENTER" layoutX="15.0" layoutY="21.0" mnemonicParsing="false" onAction="#menuClick" prefHeight="105.0" prefWidth="102.0" stylesheets="@application.css" text="감튀" textAlignment="CENTER" />
+                        <Button fx:id="side2" alignment="BOTTOM_CENTER" layoutX="150.0" layoutY="20.0" mnemonicParsing="false" onAction="#menuClick" prefHeight="104.0" prefWidth="99.0" text="치감튀" />
+                        <Button fx:id="side3" alignment="BOTTOM_CENTER" layoutX="288.0" layoutY="21.0" mnemonicParsing="false" onAction="#menuClick" prefHeight="103.0" prefWidth="98.0" text="베치감튀" />
+                        <Button fx:id="side4" alignment="BOTTOM_CENTER" layoutX="15.0" layoutY="147.0" mnemonicParsing="false" onAction="#menuClick" prefHeight="105.0" prefWidth="100.0" stylesheets="@application.css" text="스치감튀" textAlignment="CENTER" />
+                        <Button fx:id="side5" alignment="BOTTOM_CENTER" layoutX="150.0" layoutY="147.0" mnemonicParsing="false" onAction="#menuClick" prefHeight="104.0" prefWidth="102.0" stylesheets="@application.css" text="치텐" textAlignment="CENTER" />
+                        <Button fx:id="side6" alignment="BOTTOM_CENTER" layoutX="286.0" layoutY="147.0" mnemonicParsing="false" onAction="#menuClick" prefHeight="105.0" prefWidth="101.0" stylesheets="@application.css" text="치볼" textAlignment="CENTER" />
                      </children>
                   </AnchorPane>
               </content>
@@ -144,8 +145,8 @@
                                     <Image url="@../img/상품%20페이지%20-음료2.png" />
                                  </image>
                               </ImageView>
-                              <Button fx:id="beverage10" alignment="BOTTOM_CENTER" layoutX="20.0" layoutY="26.0" mnemonicParsing="false" onAction="#testClick" prefHeight="122.0" prefWidth="97.0" stylesheets="@application.css" text="하이볼" textAlignment="CENTER" />
-                              <Button fx:id="beverage11" alignment="BOTTOM_CENTER" layoutX="149.0" layoutY="26.0" mnemonicParsing="false" onAction="#testClick" prefHeight="122.0" prefWidth="97.0" stylesheets="@application.css" text="진저하이볼" textAlignment="CENTER" />
+                              <Button fx:id="beverage10" alignment="BOTTOM_CENTER" layoutX="20.0" layoutY="26.0" mnemonicParsing="false" onAction="#menuClick" prefHeight="122.0" prefWidth="97.0" stylesheets="@application.css" text="하이볼" textAlignment="CENTER" />
+                              <Button fx:id="beverage11" alignment="BOTTOM_CENTER" layoutX="149.0" layoutY="26.0" mnemonicParsing="false" onAction="#menuClick" prefHeight="122.0" prefWidth="97.0" stylesheets="@application.css" text="진저하이볼" textAlignment="CENTER" />
                               <Button fx:id="back" layoutX="20.0" layoutY="404.0" mnemonicParsing="false" onAction="#changeScene" text="back" />
                               <Pane fx:id="pnlBeverageFirst" layoutX="-1.0" layoutY="-1.0" prefHeight="440.0" prefWidth="404.0" style="-fx-background-color: #B1D3C5;">
                                  <children>
@@ -154,15 +155,15 @@
                                           <Image url="@../img/상품%20페이지%20-음료1.png" />
                                        </image>
                                     </ImageView>
-                                    <Button fx:id="beverage1" alignment="BOTTOM_CENTER" layoutX="19.0" layoutY="22.0" mnemonicParsing="false" onAction="#testClick" prefHeight="116.0" prefWidth="99.0" stylesheets="@application.css" text="코카콜라" textAlignment="CENTER" />
-                                    <Button fx:id="beverage2" alignment="BOTTOM_CENTER" layoutX="150.0" layoutY="22.0" mnemonicParsing="false" onAction="#testClick" prefHeight="116.0" prefWidth="98.0" text="제로 코카콜라" />
-                                    <Button fx:id="beverage3" alignment="BOTTOM_CENTER" layoutX="284.0" layoutY="21.0" mnemonicParsing="false" onAction="#testClick" prefHeight="116.0" prefWidth="98.0" text="스프라이트" />
-                                    <Button fx:id="beverage4" alignment="BOTTOM_CENTER" layoutX="17.0" layoutY="155.0" mnemonicParsing="false" onAction="#testClick" prefHeight="116.0" prefWidth="99.0" stylesheets="@application.css" text="제로 스프라이트" textAlignment="CENTER" />
-                                    <Button fx:id="beverage5" alignment="BOTTOM_CENTER" layoutX="150.0" layoutY="157.0" mnemonicParsing="false" onAction="#testClick" prefHeight="116.0" prefWidth="97.0" stylesheets="@application.css" text="환타" textAlignment="CENTER" />
-                                    <Button fx:id="beverage6" alignment="BOTTOM_CENTER" layoutX="283.0" layoutY="155.0" mnemonicParsing="false" onAction="#testClick" prefHeight="116.0" prefWidth="100.0" stylesheets="@application.css" text="밀크쉐이크" textAlignment="CENTER" />
-                                    <Button fx:id="beverage7" alignment="BOTTOM_CENTER" layoutX="17.0" layoutY="289.0" mnemonicParsing="false" onAction="#testClick" prefHeight="116.0" prefWidth="97.0" stylesheets="@application.css" text="페리에 라임" textAlignment="CENTER" />
-                                    <Button fx:id="beverage8" alignment="BOTTOM_CENTER" layoutX="148.0" layoutY="289.0" mnemonicParsing="false" onAction="#testClick" prefHeight="116.0" prefWidth="101.0" stylesheets="@application.css" text="닥터페퍼" textAlignment="CENTER" />
-                                    <Button fx:id="beverage9" alignment="BOTTOM_CENTER" layoutX="283.0" layoutY="289.0" mnemonicParsing="false" onAction="#testClick" prefHeight="116.0" prefWidth="98.0" stylesheets="@application.css" text="크림소다" textAlignment="CENTER" />
+                                    <Button fx:id="beverage1" alignment="BOTTOM_CENTER" layoutX="19.0" layoutY="22.0" mnemonicParsing="false" onAction="#menuClick" prefHeight="116.0" prefWidth="99.0" stylesheets="@application.css" text="코카콜라" textAlignment="CENTER" />
+                                    <Button fx:id="beverage2" alignment="BOTTOM_CENTER" layoutX="150.0" layoutY="22.0" mnemonicParsing="false" onAction="#menuClick" prefHeight="116.0" prefWidth="98.0" text="제로 코카콜라" />
+                                    <Button fx:id="beverage3" alignment="BOTTOM_CENTER" layoutX="284.0" layoutY="21.0" mnemonicParsing="false" onAction="#menuClick" prefHeight="116.0" prefWidth="98.0" text="스프라이트" />
+                                    <Button fx:id="beverage4" alignment="BOTTOM_CENTER" layoutX="17.0" layoutY="155.0" mnemonicParsing="false" onAction="#menuClick" prefHeight="116.0" prefWidth="99.0" stylesheets="@application.css" text="제로 스프라이트" textAlignment="CENTER" />
+                                    <Button fx:id="beverage5" alignment="BOTTOM_CENTER" layoutX="150.0" layoutY="157.0" mnemonicParsing="false" onAction="#menuClick" prefHeight="116.0" prefWidth="97.0" stylesheets="@application.css" text="환타" textAlignment="CENTER" />
+                                    <Button fx:id="beverage6" alignment="BOTTOM_CENTER" layoutX="283.0" layoutY="155.0" mnemonicParsing="false" onAction="#menuClick" prefHeight="116.0" prefWidth="100.0" stylesheets="@application.css" text="밀크쉐이크" textAlignment="CENTER" />
+                                    <Button fx:id="beverage7" alignment="BOTTOM_CENTER" layoutX="17.0" layoutY="289.0" mnemonicParsing="false" onAction="#menuClick" prefHeight="116.0" prefWidth="97.0" stylesheets="@application.css" text="페리에 라임" textAlignment="CENTER" />
+                                    <Button fx:id="beverage8" alignment="BOTTOM_CENTER" layoutX="148.0" layoutY="289.0" mnemonicParsing="false" onAction="#menuClick" prefHeight="116.0" prefWidth="101.0" stylesheets="@application.css" text="닥터페퍼" textAlignment="CENTER" />
+                                    <Button fx:id="beverage9" alignment="BOTTOM_CENTER" layoutX="283.0" layoutY="289.0" mnemonicParsing="false" onAction="#menuClick" prefHeight="116.0" prefWidth="98.0" stylesheets="@application.css" text="크림소다" textAlignment="CENTER" />
                                     <Button fx:id="next" layoutX="352.0" layoutY="408.0" mnemonicParsing="false" onAction="#changeScene" text="next" />
                                  </children>
                               </Pane>
@@ -200,11 +201,11 @@
           <Button fx:id="btnOrder" maxHeight="116.0" maxWidth="80.0" mnemonicParsing="false" onAction="#order" prefHeight="116.0" prefWidth="50.0" stylesheets="@ClearButton.css" text="주문하기" textFill="TRANSPARENT" />
         </buttons>
       </ButtonBar>
-      <Button fx:id="bthome" layoutX="3.0" layoutY="3.0" mnemonicParsing="false" onAction="#home" prefHeight="45.0" prefWidth="49.0" stylesheets="@ClearButton.css" text="홈으로" textFill="TRANSPARENT" />
+      <Button fx:id="btnHome" layoutX="3.0" layoutY="3.0" mnemonicParsing="false" onAction="#home" prefHeight="45.0" prefWidth="49.0" stylesheets="@ClearButton.css" text="홈으로" textFill="TRANSPARENT" />
       <Line endX="403.00006103515625" endY="546.0" startX="403.0" startY="3.0" strokeWidth="2.0" />
       <Line endX="798.977294921875" endY="534.0" layoutX="-1.0" layoutY="13.0" startX="-3.0" startY="534.0" strokeWidth="2.0" />
       <Line endX="-8.0" endY="89.0" layoutX="9.0" layoutY="22.0" startX="797.0" startY="89.0" strokeWidth="2.0" />
-      <ImageView fx:id="danger1" fitHeight="545.0" fitWidth="403.0" layoutX="404.0">
+      <ImageView fx:id="explanation" fitHeight="545.0" fitWidth="403.0" layoutX="404.0">
       <image>
             <Image url="@../img/광고1.png" />
          </image>

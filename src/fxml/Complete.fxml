@@ -33,12 +33,12 @@
             </TableView>
             <Label layoutX="28.0" layoutY="527.0" prefHeight="14.0" prefWidth="54.0" text="결제 방법" />
             <Label layoutX="31.0" layoutY="122.0" text="주문 번호" />
-            <Label fx:id="lbPayment" layoutX="100.0" layoutY="526.0" prefHeight="14.0" prefWidth="525.0" text="String payment" />
-            <Label fx:id="lbOrderNo" layoutX="102.0" layoutY="123.0" prefHeight="14.0" prefWidth="525.0" text="INT orderNo" />
+            <Label fx:id="lblPayment" layoutX="100.0" layoutY="526.0" prefHeight="14.0" prefWidth="525.0" text="String payment" />
+            <Label fx:id="lblOrderNo" layoutX="102.0" layoutY="123.0" prefHeight="14.0" prefWidth="525.0" text="INT orderNo" />
             <Label layoutX="29.0" layoutY="495.0" prefHeight="14.0" prefWidth="54.0" text="총 금액" />
-            <Label fx:id="lbPrice" layoutX="102.0" layoutY="493.0" prefHeight="14.0" prefWidth="525.0" text="Int price" />
+            <Label fx:id="lblPrice" layoutX="102.0" layoutY="493.0" prefHeight="14.0" prefWidth="525.0" text="Int price" />
             <Label layoutX="31.0" layoutY="145.0" text="식사 방법" />
-            <Label fx:id="lbEatingWay" layoutX="102.0" layoutY="145.0" prefHeight="14.0" prefWidth="525.0" text="String eatingWay" />
+            <Label fx:id="lblEatingWay" layoutX="102.0" layoutY="145.0" prefHeight="14.0" prefWidth="525.0" text="String eatingWay" />
          </children>
       </AnchorPane>
    </children>

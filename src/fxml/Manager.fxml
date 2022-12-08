@@ -13,22 +13,18 @@
             <Image url="@../img/관리자%20페이지%201.png" />
          </image>
       </ImageView>
-      <Button fx:id="btsalesvolume" layoutX="315.0" layoutY="326.0" mnemonicParsing="false" onAction="#salesvolume" prefHeight="61.0" prefWidth="169.0" stylesheets="@ClearButton.css" text="판매량">
+      <Button fx:id="btnSalesVolume" layoutX="315.0" layoutY="326.0" mnemonicParsing="false" onAction="#salesvolume" prefHeight="61.0" prefWidth="169.0" stylesheets="@ClearButton.css" text="판매량">
          <font>
             <Font size="29.0" />
          </font>
       </Button>
-      <Button fx:id="btnotorderable" layoutX="315.0" layoutY="445.0" mnemonicParsing="false" onAction="#notorderable" prefHeight="61.0" prefWidth="169.0" stylesheets="@ClearButton.css" text="상태 변경">
+      <Button fx:id="btnExit" layoutX="318.0" layoutY="651.0" mnemonicParsing="false" onAction="#exitmanager" prefHeight="26.0" prefWidth="163.0" stylesheets="@ClearButton.css" text="관리자 모드 종료" />
+      <AnchorPane layoutX="77.0" layoutY="281.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #b1d3c5;" />
+      <AnchorPane layoutX="285.0" layoutY="103.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #b1d3c5;" />
+      <Button fx:id="btnSystemClose" layoutX="315.0" layoutY="443.0" mnemonicParsing="false" onAction="#systemClose" prefHeight="61.0" prefWidth="169.0" stylesheets="@ClearButton.css" text="종료">
          <font>
             <Font size="29.0" />
          </font>
       </Button>
-      <Button fx:id="btadjustmenu" layoutX="315.0" layoutY="210.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="169.0" stylesheets="@ClearButton.css" text="메뉴 조정">
-         <font>
-            <Font size="29.0" />
-         </font>
-      </Button>
-      <Button fx:id="btexit" layoutX="318.0" layoutY="651.0" mnemonicParsing="false" onAction="#exitmanager" prefHeight="26.0" prefWidth="163.0" stylesheets="@ClearButton.css" text="관리자 모드 종료" />
-      <Button fx:id="popUpdatebutton" layoutX="171.0" layoutY="341.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="106.0" stylesheets="@ClearButton.css" text="인기상품최신화" />
    </children>
 </AnchorPane>

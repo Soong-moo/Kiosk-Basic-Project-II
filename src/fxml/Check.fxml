@@ -33,6 +33,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
+            <Button fx:id="btnCoupon" onAction="#coupon" layoutX="62.0" layoutY="613.0" mnemonicParsing="false" text="Button" />
          </children></AnchorPane>
    </children>
 </AnchorPane>

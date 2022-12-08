@@ -10,7 +10,7 @@
    <children>
       <AnchorPane layoutY="-6.0" prefHeight="700.0" prefWidth="800.0">
          <children>
-            <Button fx:id="btnoexit" layoutX="47.0" layoutY="528.0" mnemonicParsing="false" onAction="#exit" text="뒤로가기" />
+            <Button fx:id="btnExit" layoutX="47.0" layoutY="528.0" mnemonicParsing="false" onAction="#exit" text="뒤로가기" />
             <TableView fx:id="hamburgerTable" layoutX="32.0" layoutY="53.0" prefHeight="200.0" prefWidth="722.0" stylesheets="@tableViewStyle.css">
               <columns>
                   <TableColumn fx:id="hamburgerName" prefWidth="352.0000305175781" text="햄버거" />

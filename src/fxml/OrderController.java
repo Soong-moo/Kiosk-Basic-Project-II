@@ -1,11 +1,17 @@
 package fxml;
 
+import java.io.IOException;
+import java.net.URL;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -22,9 +28,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ResourceBundle;
@@ -32,25 +37,21 @@ import java.util.ResourceBundle;
 import Database.DBConnect;
 import tableView.InsertProduct;
 import tableView.Product;
-/*
- * button 10개정도? categoryId와 버튼을 눌렀을 때 해당하는 제품명 가격 개수 장바구니
- */
 
 public class OrderController implements Initializable {
 
-	DBConnect dbc = new DBConnect();
 	StatisticController s = new StatisticController();
-	
+
 	@FXML
 	private Button btnOrder; // 주문버튼
 	@FXML
-	private Button bthome;
+	private Button btnHome; // 돌아가기 버튼
 	@FXML
-	public Button popular1;
+	public Button popular1; // 인기상품 1위
 	@FXML
-	private Button popular2;
+	private Button popular2; // 인기상품 2위
 	@FXML
-	private Button popular3;
+	private Button popular3; // 인기상품 3위
 
 	@FXML
 	private Button burger1; // 치즈버거
@@ -106,17 +107,18 @@ public class OrderController implements Initializable {
 	private Pane pnlBeverageSecond; // 음료 뒷 페이지
 
 	@FXML
-	private Label oLabel1, oLabel2, oLabel3, opInfo1;
+	private Label burgerOption; // 옵션 추가할 버거 이름
 	@FXML
 	private ComboBox<String> ocombobox1, ocombobox2, ocombobox3;
 	@FXML
-	private Button obutton1, obutton2;
+	private Button notOption, optionChoice;
 	@FXML
-	private ObservableList<String> olist1 = FXCollections.observableArrayList("선택 안함", "비프", "통새우 4개", "통새우 8개");
+	private ObservableList<String> optionList1 = FXCollections.observableArrayList("선택 안함", "비프", "통새우 4개", "통새우 8개");
 
-	private ObservableList<String> olist2 = FXCollections.observableArrayList("선택 안함", "치즈 1장", "치즈 2장", "치즈 3장");
+	private ObservableList<String> optionList2 = FXCollections.observableArrayList("선택 안함", "치즈 1장", "치즈 2장", "치즈 3장");
 
-	private ObservableList<String> olist3 = FXCollections.observableArrayList("선택 안함", "아보카도", "파인애플", "피클", "할라피뇨", "기본 야채 추가");
+	private ObservableList<String> optionList3 = FXCollections.observableArrayList("선택 안함", "아보카도", "파인애플", "피클",
+			"할라피뇨", "기본 야채 추가");
 
 	@FXML
 	private Button plus;
@@ -136,56 +138,51 @@ public class OrderController implements Initializable {
 	private TableColumn<Product, String> option2Column;
 	@FXML
 	private TableColumn<Product, String> option3Column;
-	
-	//인기1위제품
+
+	// 인기1위제품
 	@FXML
-	private Label FemptyH; //인기햄버거 출력문
+	private Label burgerRank1;
 	@FXML
-	private Label FemptyO1;
+	private Label option1Rank1;
 	@FXML
-	private Label FemptyO2;
+	private Label option2Rank1;
 	@FXML
-	private Label FemptyO3;
-	//인기2위제품
+	private Label option3Rank1;
+
+	// 인기2위제품
 	@FXML
-	private Label FemptyH1; //인기햄버거 출력문
+	private Label burgerRank2;
 	@FXML
-	private Label FemptyO11;
+	private Label option1Rank2;
 	@FXML
-	private Label FemptyO21;
+	private Label option2Rank2;
 	@FXML
-	private Label FemptyO31;
-	//인기3위제품
+	private Label option3Rank2;
+	// 인기3위제품
 	@FXML
-	private Label FemptyH2; //인기햄버거 출력문
+	private Label burgerRank3;
 	@FXML
-	private Label FemptyO12;
+	private Label option1Rank3;
 	@FXML
-	private Label FemptyO22;
+	private Label option2Rank3;
 	@FXML
-	private Label FemptyO32;
+	private Label option3Rank3;
+
 	@FXML
 	private Button updatefamous;
-	
 	@FXML
-	private ImageView danger1;	//광고 + 설명서 이미지
-	
+	private ImageView explanation; // 광고 + 설명서 이미지
 	@FXML
-	private Tab	bestTab; // 인기 탭
+	private Tab bestTab;
 	@FXML
-	private Tab burgerTab; // 버거 탭
+	private Tab burgerTab;
 	@FXML
-	private Tab sideTab; // 사이드 탭
+	private Tab sideTab;
 	@FXML
-	private Tab drankTab; // 음료 탭
-	
-	
-	
-	
+	private Tab drankTab;
 
 	public static ArrayList<Product> arrayProduct = new ArrayList<>(); // tableView ArrayList
-	public static ArrayList<InsertProduct> arrayInsertProduct = new ArrayList<>(); // INSERT DB ArrayList  
-	
+	public static ArrayList<InsertProduct> arrayInsertProduct = new ArrayList<>(); // INSERT DB ArrayList
 
 	int i = 0; // i = plus,minus
 	int cnt; // 개수
@@ -194,57 +191,28 @@ public class OrderController implements Initializable {
 	int categoryID;
 	int productID;
 
-	String p_name;
-	int p_price;
-
 	String productButtonInfo;
 	String optionPageStr1;
 	String optionPageStr2;
 	String optionPageStr3;
-	
-	int optionPage1=99;
-	int optionPage2=99;
-	int optionPage3=99;
-	
+
+	int optionPage1 = 99;
+	int optionPage2 = 99;
+	int optionPage3 = 99;
+
+	// 클래스 내 옵션 정보
 	int optionID;
-	String  optionName;
-	int optionPrice=0;
-	
-	int imageCnt=0;		//설명서 았다리갔다리
+	String optionName;
+	int optionPrice = 0;
 
-	
-	//탭 클릭 시 이미지 전환
-	public void tabImageChange() {
-		if (bestTab.isSelected() == false) {
-			danger1.setImage(new Image("/img/고양이설명서.jpeg"));
-		}
-	}
-	
-	
-	
-	//광고 이미지 숨기기
-	public void imageChange() {
-		if(imageCnt == 0) {
-			danger1.toBack();
-			imageCnt =1;
-		}
-		else {
-			danger1.toFront();
-			imageCnt = 0;
-		}
-	}
-	
+	int imageCnt = 0; // 설명서 반전
 
-	// 버거 메뉴 확인
-	public void opInfoLabel() {
-		opInfo1.setText(productButtonInfo);
-	}
-	
-	
+	int popularInfo = 0; // 인기 상품 정보
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		t();
+		print(); // 통계 출력
+
 		ObservableList<Product> products = tableView.getItems();
 		products.addAll(arrayProduct);
 		tableView.setItems(products);
@@ -255,57 +223,74 @@ public class OrderController implements Initializable {
 		option1Column.setCellValueFactory(new PropertyValueFactory<Product, String>("option1"));
 		option2Column.setCellValueFactory(new PropertyValueFactory<Product, String>("option2"));
 		option3Column.setCellValueFactory(new PropertyValueFactory<Product, String>("option3"));
-        ocombobox1.setItems(olist1);    
-        ocombobox2.setItems(olist2);  
-        ocombobox3.setItems(olist3);
-        
-        //인기 1위
-        FemptyH.setText(s.productStatistics.get(0).getName());
-        FemptyO1.setText(s.option1Array.get(0).getName());
-        FemptyO2.setText(s.option2Array.get(0).getName());
-        FemptyO3.setText(s.option3Array.get(0).getName());
-        
-        //인기 2위
-        FemptyH1.setText(s.productStatistics.get(1).getName());
-        FemptyO11.setText(s.option1Array.get(1).getName());
-        FemptyO21.setText(s.option2Array.get(1).getName());
-        FemptyO31.setText(s.option3Array.get(1).getName());
-        
-        //인기 3위
-        FemptyH2.setText(s.productStatistics.get(2).getName());
-        FemptyO12.setText(s.option1Array.get(2).getName());
-        FemptyO22.setText(s.option2Array.get(2).getName());
-        FemptyO32.setText(s.option3Array.get(2).getName());
+		ocombobox1.setItems(optionList1);
+		ocombobox2.setItems(optionList2);
+		ocombobox3.setItems(optionList3);
+
+		// 인기 1위
+		burgerRank1.setText(s.productStatistics.get(0).getName());
+		option1Rank1.setText(s.option1Array.get(0).getName());
+		option2Rank1.setText(s.option2Array.get(0).getName());
+		option3Rank1.setText(s.option3Array.get(0).getName());
+
+		// 인기 2위
+		burgerRank2.setText(s.productStatistics.get(1).getName());
+		option1Rank2.setText(s.option1Array.get(1).getName());
+		option2Rank2.setText(s.option2Array.get(1).getName());
+		option3Rank2.setText(s.option3Array.get(1).getName());
+
+		// 인기 3위
+		burgerRank3.setText(s.productStatistics.get(2).getName());
+		option1Rank3.setText(s.option1Array.get(2).getName());
+		option2Rank3.setText(s.option2Array.get(2).getName());
+		option3Rank3.setText(s.option3Array.get(2).getName());
 
 	}
 
-	// onAction
-	public void order() throws Exception {
-		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/Check.fxml"));
-		Scene scene = new Scene(View);
-		Stage primaryStage = (Stage) btnOrder.getScene().getWindow();
-		primaryStage.setScene(scene);
-		primaryStage.show();
+	// 통계 출력
+	public void print() {
+		s.print();
 	}
-	
-	public void home() throws Exception {
-		Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/FirstPage.fxml"));
-		Scene scene = new Scene(View);
-		Stage primaryStage = (Stage) bthome.getScene().getWindow();
-		primaryStage.setScene(scene);
-		primaryStage.show();
+
+	// 주문하기
+	public void order() {
+		if (arrayProduct.size() == 0) {
+			notChoiceWarning();
+			return;
+		}
+
+		try {
+			Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/Check.fxml"));
+			Scene scene = new Scene(View);
+			Stage primaryStage = (Stage) btnOrder.getScene().getWindow();
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
+
+	// 처음 화면 복귀
+	public void home() {
+		try {
+			Parent View = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/FirstPage.fxml"));
+			Scene scene = new Scene(View);
+			Stage primaryStage = (Stage) btnHome.getScene().getWindow();
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	// 장바구니
-	public void testClick(ActionEvent event) throws Exception {
+	public void menuClick(ActionEvent event) {
 
 		// if(event.getSource() == burger1) return; //선택 방법 1
 
 		String btn = ((Button) event.getSource()).getId(); // 해당 버튼 id 가져옴
 
 		switch (btn) {
-		case "popular1" :
-			break;
 		case "burger1":
 			productButtonInfo = "치즈버거";
 			categoryID = 2;
@@ -392,24 +377,18 @@ public class OrderController implements Initializable {
 			categoryID = 4;
 			break;
 		}
-	
-		imageChange();		//설명서 숨기기
-    	
-		
-    	if(categoryID != 2) {
-    		addMenu(productButtonInfo, optionPrice);
-    	} else if(btn == "popular1" || btn == "popular2" || btn == "popular3") {
-    		return;
-    	}
-    	else {
-    		opInfoLabel();
-    	}
-		
-    	
-		
+
+		imageChange(); // 설명서 숨기기
+
+		if (categoryID != 2) {
+			addMenu(productButtonInfo, optionPrice);
+		} else {
+			burgerOptionLabel(); // 옵션 추가 전 메뉴 라벨
+		}
+
 	}
 
-	//음료 화면 전환
+	// 음료 페이지 넘김
 	public void changeScene(ActionEvent event) {
 		if (event.getSource() == next) {
 			pnlBeverageFirst.toBack();
@@ -424,16 +403,17 @@ public class OrderController implements Initializable {
 			Product p = tableView.getSelectionModel().getSelectedItem();
 			ObservableList<Product> products = tableView.getItems();
 			Iterator<Product> itr = arrayProduct.iterator();
-			Iterator<InsertProduct> insertItr = arrayInsertProduct.iterator(); 
+			Iterator<InsertProduct> insertItr = arrayInsertProduct.iterator();
 
 			while (itr.hasNext()) {
 				Product exist = itr.next();
 				InsertProduct insertExist = insertItr.next();
-				if (exist.getName().equals(p.getName()) && exist.getOption1().equals(p.getOption1()) && exist.getOption2().equals(p.getOption2()) && exist.getOption3().equals(p.getOption3())) {
+				if (exist.getName().equals(p.getName()) && exist.getOption1().equals(p.getOption1())
+						&& exist.getOption2().equals(p.getOption2()) && exist.getOption3().equals(p.getOption3())) {
 					cnt = exist.getCount();
 					exist.setCount(++cnt);
 					insertExist.setNumber(cnt);
-					exist.setPrice(exist.getPrice() + (exist.getPrice()/(cnt-1)));
+					exist.setPrice(exist.getPrice() + (exist.getPrice() / (cnt - 1)));
 					tableView.getItems().clear();
 					products.addAll(arrayProduct);
 					break;
@@ -452,15 +432,16 @@ public class OrderController implements Initializable {
 			ObservableList<Product> products = tableView.getItems();
 			Iterator<Product> itr = arrayProduct.iterator();
 			Iterator<InsertProduct> insertItr = arrayInsertProduct.iterator();
-			
+
 			while (itr.hasNext()) {
 				Product exist = itr.next();
 				InsertProduct insertExist = insertItr.next();
-				if (exist.getName().equals(p.getName()) && exist.getOption1().equals(p.getOption1()) && exist.getOption2().equals(p.getOption2()) && exist.getOption3().equals(p.getOption3())) {
+				if (exist.getName().equals(p.getName()) && exist.getOption1().equals(p.getOption1())
+						&& exist.getOption2().equals(p.getOption2()) && exist.getOption3().equals(p.getOption3())) {
 					cnt = exist.getCount();
 					exist.setCount(--cnt);
 					insertExist.setNumber(cnt);
-					exist.setPrice(exist.getPrice() - (exist.getPrice()/(cnt+1)));
+					exist.setPrice(exist.getPrice() - (exist.getPrice() / (cnt + 1)));
 					if (exist.getCount() <= 0) {
 						arrayProduct.remove(i);
 					}
@@ -477,149 +458,266 @@ public class OrderController implements Initializable {
 		}
 	}
 
-	// 중복값 알림
-	public void warning() {
-		Alert alert = new Alert(AlertType.WARNING);
-		alert.setTitle("상품 추가 오류!");
-		alert.setHeaderText("장바구니에 이미 담겨져 있습니다!");
-		alert.showAndWait();
-	}
+	// 옵션 페이지 모두 선택 안함 액션
+	public void optionOrder1() {
 
-	// 옵션 선택 안함 경고
-	public void optionNotChoiceWarning() {
-		Alert alert = new Alert(AlertType.WARNING);
-		alert.setTitle("옵션이 비어있음!");
-		alert.setHeaderText("옵션을 선택해주세요!");
-		alert.showAndWait();
-	}
-	
-	
-	//옵션 페이지 모두 선택 안함 액션
-	public void optionOrder1() throws Exception {
 		optionPage1 = 0;
 		optionPage2 = 0;
 		optionPage3 = 0;
+
 		optionPageStr1 = "X";
 		optionPageStr2 = "X";
 		optionPageStr3 = "X";
-		
+
 		optionPrice = 0;
-		
+
 		addMenu(productButtonInfo, optionPrice);
 	}
-    
-    //옵션 페이지 선택 완료 액션
-    public void optionOrder2() throws IOException, SQLException {
-    	DBConnect.optionPrice();
-    		
-		if (olist1.get(0).equals(ocombobox1.getValue())) {
+
+	// 옵션 페이지 선택 완료 액션
+	public void optionOrder2() {
+
+		DBConnect.optionPrice();
+
+		if (optionList1.get(0).equals(ocombobox1.getValue())) {
 			optionPage1 = 0;
 			optionPageStr1 = "X";
-		}
-		else if (olist1.get(1).equals(ocombobox1.getValue())) {
+		} else if (optionList1.get(1).equals(ocombobox1.getValue())) {
 			optionPage1 = 1;
 			optionPageStr1 = "비프";
-		}
-		else if (olist1.get(2).equals(ocombobox1.getValue())) {
-			optionPage1 = 2;	
+		} else if (optionList1.get(2).equals(ocombobox1.getValue())) {
+			optionPage1 = 2;
 			optionPageStr1 = "통새우 4개";
-		}
-		else if (olist1.get(3).equals(ocombobox1.getValue())) {
+		} else if (optionList1.get(3).equals(ocombobox1.getValue())) {
 			optionPage1 = 3;
 			optionPageStr1 = "통새우 8개";
 		}
-		
-			
-		if (olist2.get(0).equals(ocombobox2.getValue())) {
+
+		if (optionList2.get(0).equals(ocombobox2.getValue())) {
 			optionPage2 = 0;
 			optionPageStr2 = "X";
-		}
-		else if (olist2.get(1).equals(ocombobox2.getValue())) {
+		} else if (optionList2.get(1).equals(ocombobox2.getValue())) {
 			optionPage2 = 4;
 			optionPageStr2 = "치즈 1장";
-		}
-		else if (olist2.get(2).equals(ocombobox2.getValue())) {
+		} else if (optionList2.get(2).equals(ocombobox2.getValue())) {
 			optionPage2 = 5;
 			optionPageStr2 = "치즈 2장";
-		}
-		else if (olist2.get(3).equals(ocombobox2.getValue())) {
+		} else if (optionList2.get(3).equals(ocombobox2.getValue())) {
 			optionPage2 = 6;
 			optionPageStr2 = "치즈 3장";
 		}
-		
-		
-			
-		if (olist3.get(0).equals(ocombobox3.getValue())) {
+
+		if (optionList3.get(0).equals(ocombobox3.getValue())) {
 			optionPage3 = 0;
 			optionPageStr3 = "X";
-		}
-		else if (olist3.get(1).equals(ocombobox3.getValue())) {
+		} else if (optionList3.get(1).equals(ocombobox3.getValue())) {
 			optionPage3 = 7;
 			optionPageStr3 = "아보카도";
-		}
-		else if (olist3.get(2).equals(ocombobox3.getValue())) {
+		} else if (optionList3.get(2).equals(ocombobox3.getValue())) {
 			optionPage3 = 8;
 			optionPageStr3 = "파인애플";
-		}
-		else if (olist3.get(3).equals(ocombobox3.getValue())) {
+		} else if (optionList3.get(3).equals(ocombobox3.getValue())) {
 			optionPage3 = 9;
 			optionPageStr3 = "피클";
-		}
-		else if (olist3.get(4).equals(ocombobox3.getValue())) {
+		} else if (optionList3.get(4).equals(ocombobox3.getValue())) {
 			optionPage3 = 10;
 			optionPageStr3 = "할라피뇨";
-		}
-		else if (olist3.get(5).equals(ocombobox3.getValue())) {
+		} else if (optionList3.get(5).equals(ocombobox3.getValue())) {
 			optionPage3 = 11;
 			optionPageStr3 = "기본 야채 추가";
 		}
-		
-		if(optionPage1 == 99 || optionPage2 == 99 || optionPage3 ==99) {
-			optionNotChoiceWarning();
-		}
-		else {
-			int tmp;
-			optionPrice=0;
-		
-			while (DBConnect.rsp.next()) {
-				optionID = DBConnect.rsp.getInt("optionId");
-				optionName = DBConnect.rsp.getString("optionName");
-				tmp = DBConnect.rsp.getInt("optionPrice");
-				if (optionID == optionPage1) {
-					optionPrice += tmp;
-				}
-				if (optionID == optionPage2) {
-					optionPrice += tmp;
-				}
-				if (optionID == optionPage3) {
-					optionPrice += tmp;
-				}
-			}
-			
-			addMenu(productButtonInfo, optionPrice);
-			
-			ocombobox1.getSelectionModel().selectFirst();
-			ocombobox2.getSelectionModel().selectFirst();
-			ocombobox3.getSelectionModel().selectFirst();
-		}
-		
-    }
 
-	// TableView 값 저장 Method
-	public void addMenu(String n, int oPrice) throws SQLException {
-		
+		if (optionPage1 == 99 || optionPage2 == 99 || optionPage3 == 99) {
+			optionNotChoiceWarning();
+		} else {
+			int extra; // 추가 요금
+			optionPrice = 0;
+
+			try {
+				while (DBConnect.rs.next()) {
+					optionID = DBConnect.rs.getInt("optionId");
+					optionName = DBConnect.rs.getString("optionName");
+					extra = DBConnect.rs.getInt("optionPrice");
+
+					if (optionID == optionPage1) {
+						optionPrice += extra;
+					}
+					if (optionID == optionPage2) {
+						optionPrice += extra;
+					}
+					if (optionID == optionPage3) {
+						optionPrice += extra;
+					}
+				}
+
+				addMenu(productButtonInfo, optionPrice);
+
+				ocombobox1.getSelectionModel().selectFirst();
+				ocombobox2.getSelectionModel().selectFirst();
+				ocombobox3.getSelectionModel().selectFirst();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	// 인기 1,2,3 확인
+	public void checkPopular1() {
+		popularInfo = 0;
+		addPopular(popularInfo);
+	}
+
+	public void checkPopular2() {
+		popularInfo = 1;
+		addPopular(popularInfo);
+	}
+
+	public void checkPopular3() {
+		popularInfo = 2;
+		addPopular(popularInfo);
+	}
+
+	// 인기 상품 TableView 값 저장
+	public void addPopular(int n) {
 		int orderID = 0;
-		
+		int p_price = 0;
+		int o1_price = 0;
+		int o2_price = 0;
+		int o3_price = 0;
+
 		Iterator<Product> itr = arrayProduct.iterator();
+
 		DBConnect.test();
-		
+
+		// 중복 검사
 		while (itr.hasNext()) {
 			Product product = itr.next();
-			if (product.getName().equals(n) && product.getOption1().equals(optionPageStr1) && product.getOption2().equals(optionPageStr2) && product.getOption3().equals(optionPageStr3)) {
+			if (product.getName().equals(s.productStatistics.get(n).getName())
+					&& product.getOption1().equals(s.option1Array.get(n).getName())
+					&& product.getOption2().equals(s.option2Array.get(n).getName())
+					&& product.getOption3().equals(s.option3Array.get(n).getName())) {
 				warning();
 				return;
 			}
-			else if (product.getName().equals(n) && categoryID != 2) {
+		}
+
+		// 상품 ID 검색
+		if (s.productStatistics.get(n).getName().equals("치즈버거")) {
+			productID = 1;
+			p_price = 4000;
+		} else if (s.productStatistics.get(n).getName().equals("치킨버거")) {
+			productID = 2;
+			p_price = 4500;
+		} else if (s.productStatistics.get(n).getName().equals("불고기버거")) {
+			productID = 3;
+			p_price = 5000;
+		} else if (s.productStatistics.get(n).getName().equals("새우버거")) {
+			productID = 4;
+			p_price = 5000;
+		}
+
+		// 옵션 ID 검색
+		if (s.option1Array.get(n).getName().equals("선택 안함")) {
+			optionPage1 = 0;
+			o1_price = 0;
+		} else if (s.option1Array.get(n).getName().equals("비프")) {
+			optionPage1 = 1;
+			o1_price = 1500;
+		} else if (s.option1Array.get(n).getName().equals("통새우 4개")) {
+			optionPage1 = 2;
+			o1_price = 1000;
+		} else if (s.option1Array.get(n).getName().equals("통새우 8개")) {
+			optionPage1 = 3;
+			o1_price = 2000;
+		}
+
+		if (s.option2Array.get(n).getName().equals("선택 안함")) {
+			optionPage2 = 0;
+			o2_price = 0;
+		} else if (s.option2Array.get(n).getName().equals("치즈 1장")) {
+			optionPage2 = 4;
+			o2_price = 500;
+		} else if (s.option2Array.get(n).getName().equals("치즈 2장")) {
+			optionPage2 = 5;
+			o2_price = 1000;
+		} else if (s.option2Array.get(n).getName().equals("치즈 3장")) {
+			optionPage2 = 6;
+			o2_price = 1500;
+		}
+
+		if (s.option3Array.get(n).getName().equals("선택 안함")) {
+			optionPage3 = 0;
+			o3_price = 0;
+		} else if (s.option3Array.get(n).getName().equals("아보카도")) {
+			optionPage3 = 7;
+			o3_price = 1500;
+		} else if (s.option3Array.get(n).getName().equals("파인애플")) {
+			optionPage3 = 8;
+			o3_price = 1000;
+		} else if (s.option3Array.get(n).getName().equals("피클")) {
+			optionPage3 = 9;
+			o3_price = 500;
+		} else if (s.option3Array.get(n).getName().equals("할라피뇨")) {
+			optionPage3 = 10;
+			o3_price = 500;
+		} else if (s.option3Array.get(n).getName().equals("기본 야채 추가")) {
+			optionPage3 = 11;
+			o3_price = 1000;
+		}
+
+		try {
+
+			while (DBConnect.rs.next()) {
+				name = DBConnect.rs.getString("name");
+				price = DBConnect.rs.getInt("price");
+				categoryID = DBConnect.rs.getInt("categoryId");
+				productID = DBConnect.rs.getInt("productId");
+				if (name.equals(s.productStatistics.get(n).getName()))
+					break;
+			}
+
+			DBConnect.getOrderID(); // 주문번호 가져옴
+
+			while (DBConnect.rs.next()) {
+				orderID = DBConnect.rs.getInt("orderID");
+			}
+
+			if (name.equals(s.productStatistics.get(n).getName())) {
+				Product product = new Product(s.productStatistics.get(n).getName(),
+						p_price + o1_price + o2_price + o3_price, s.option1Array.get(n).getName(),
+						s.option2Array.get(n).getName(), s.option3Array.get(n).getName());
+				InsertProduct insertProduct = new InsertProduct(orderID + 1, 2, productID, optionPage1, optionPage2,
+						optionPage3, 1);
+				arrayProduct.add(product); // ArrayList 추가
+				arrayInsertProduct.add(insertProduct); // insert ArrayList
+				ObservableList<Product> products = tableView.getItems();
+				products.add(product);
+				tableView.setItems(products);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	// TableView 값 저장 Method
+	public void addMenu(String n, int oPrice) {
+
+		int orderID = 0;
+
+		Iterator<Product> itr = arrayProduct.iterator();
+		DBConnect.test();
+
+		while (itr.hasNext()) {
+			Product product = itr.next();
+			if (product.getName().equals(n) && product.getOption1().equals(optionPageStr1)
+					&& product.getOption2().equals(optionPageStr2) && product.getOption3().equals(optionPageStr3)) {
+				warning();
+				return;
+			} else if (product.getName().equals(n) && categoryID != 2) {
 				warning();
 				return;
 			}
@@ -634,23 +732,23 @@ public class OrderController implements Initializable {
 				if (name.equals(n))
 					break;
 			}
-			
-			dbc.getOrderID();
-			
-			while(dbc.rs.next()) {
-				orderID = dbc.rs.getInt("orderID");
+
+			DBConnect.getOrderID();
+
+			while (DBConnect.rs.next()) {
+				orderID = DBConnect.rs.getInt("orderID");
 			}
-			
-			if (name.equals(n) && categoryID ==2) {
-				Product product = new Product(name, price+oPrice, optionPageStr1, optionPageStr2, optionPageStr3);
-				InsertProduct insertProduct = new InsertProduct(orderID + 1, categoryID, productID, optionPage1, optionPage2, optionPage3, 1);
+
+			if (name.equals(n) && categoryID == 2) {
+				Product product = new Product(name, price + oPrice, optionPageStr1, optionPageStr2, optionPageStr3);
+				InsertProduct insertProduct = new InsertProduct(orderID + 1, categoryID, productID, optionPage1,
+						optionPage2, optionPage3, 1);
 				arrayProduct.add(product); // ArrayList 추가
 				arrayInsertProduct.add(insertProduct); // insert ArrayList
 				ObservableList<Product> products = tableView.getItems();
 				products.add(product);
 				tableView.setItems(products);
-			}
-			else if (name.equals(n) && categoryID != 2) {
+			} else if (name.equals(n) && categoryID != 2) {
 				Product product = new Product(name, price, "-", "-", "-");
 				InsertProduct insertProduct = new InsertProduct(orderID + 1, categoryID, productID, 0, 0, 0, 1);
 				arrayProduct.add(product); // ArrayList 추가
@@ -662,11 +760,53 @@ public class OrderController implements Initializable {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		imageChange();		//설명서 나오기
-	}
-	
-	public void t() {
-		s.test();
+		imageChange(); // 설명서 나오기
 	}
 
+	// 미선택 주문시
+	public void notChoiceWarning() {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("상품이 선택 되지 않음!");
+		alert.setHeaderText("상품 선택 후 주문해주세요!");
+		alert.showAndWait();
+	}
+
+	// 중복값 알림
+	public void warning() {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("상품 추가 오류!");
+		alert.setHeaderText("장바구니에 이미 담겨져 있습니다!");
+		alert.showAndWait();
+	}
+
+	// 옵션 선택 안함 알림
+	public void optionNotChoiceWarning() {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("옵션이 비어있음!");
+		alert.setHeaderText("옵션을 선택해주세요!");
+		alert.showAndWait();
+	}
+
+	// 탭 클릭 시 이미지 전환
+	public void tabImageChange() {
+		if (bestTab.isSelected() == false) {
+			explanation.setImage(new Image("/img/고양이설명서.jpeg"));
+		}
+	}
+
+	// 광고 이미지 숨기기
+	public void imageChange() {
+		if (imageCnt == 0) {
+			explanation.toBack();
+			imageCnt = 1;
+		} else {
+			explanation.toFront();
+			imageCnt = 0;
+		}
+	}
+
+	// 옵션 선택 버거 이름 출력
+	public void burgerOptionLabel() {
+		burgerOption.setText(productButtonInfo);
+	}
 }
