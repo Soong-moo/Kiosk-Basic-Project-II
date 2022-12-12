@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
@@ -18,6 +19,8 @@ public class ManagerController {
 	private Button btnSystemClose; // 키오스크 종료
 	@FXML
 	private Button btnExit; // 나가기
+	@FXML
+	private AnchorPane informationPane;	//관지라-정보
 
 	public void salesvolume() {
 		try {
@@ -42,6 +45,19 @@ public class ManagerController {
 			e.printStackTrace();
 		}
 	}
+	
+
+	
+	//제작자 정보 출력
+	public void informationSelect() {
+		informationPane.toFront();
+	}
+	
+	//정보 나가기
+	public void informationExitSelect() {
+		informationPane.toBack();
+	}
+	
 	
 	//키오스크 종료
 	public void systemClose() {

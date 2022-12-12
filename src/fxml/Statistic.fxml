@@ -11,7 +11,7 @@
       <AnchorPane layoutY="-6.0" prefHeight="700.0" prefWidth="800.0">
          <children>
             <Button fx:id="btnExit" layoutX="47.0" layoutY="528.0" mnemonicParsing="false" onAction="#exit" text="뒤로가기" />
-            <TableView fx:id="hamburgerTable" layoutX="32.0" layoutY="53.0" prefHeight="200.0" prefWidth="722.0" stylesheets="@tableViewStyle.css">
+            <TableView fx:id="hamburgerTable" layoutX="32.0" layoutY="53.0" prefHeight="200.0" prefWidth="722.0" stylesheets="css/@tableViewStyle.css">
               <columns>
                   <TableColumn fx:id="hamburgerName" prefWidth="352.0000305175781" text="햄버거" />
                   <TableColumn fx:id="hamburgerCount" prefWidth="366.6666259765625" text="판매개수" />
@@ -36,6 +36,9 @@
                 <TableColumn fx:id="option3Name" prefWidth="94.6666259765625" text="옵션3" />
                 <TableColumn fx:id="option3Count" prefWidth="103.33333333333334" text="판매개수" />
               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
             <TableView fx:id="optionsTable" layoutX="-2.0" layoutY="313.0" prefHeight="200.0" prefWidth="206.0">
               <columns>

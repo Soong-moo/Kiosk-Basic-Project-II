@@ -589,7 +589,7 @@ public class OrderController implements Initializable {
 
 		Iterator<Product> itr = arrayProduct.iterator();
 
-		DBConnect.test();
+		DBConnect.getProductData();
 
 		// 중복 검사
 		while (itr.hasNext()) {
@@ -709,7 +709,7 @@ public class OrderController implements Initializable {
 		int orderID = 0;
 
 		Iterator<Product> itr = arrayProduct.iterator();
-		DBConnect.test();
+		DBConnect.getProductData();
 
 		while (itr.hasNext()) {
 			Product product = itr.next();
@@ -790,7 +790,7 @@ public class OrderController implements Initializable {
 	// 탭 클릭 시 이미지 전환
 	public void tabImageChange() {
 		if (bestTab.isSelected() == false) {
-			explanation.setImage(new Image("/img/고양이설명서.jpeg"));
+			explanation.setImage(new Image("/img/상품 페이지 설명서1.png"));
 		}
 	}
 

@@ -34,13 +34,7 @@ public class DBConnect {
 			// @return Connection
 			con = DriverManager.getConnection(url, "test", "test");
 			st = con.createStatement();
-			// stp = conp.createStatement();
 			System.out.println("연결 성공");
-
-//			if(con != null) con.close();
-//			if(st != null) st.close();
-//			if(rs != null) rs.close();
-//			if(pst != null) pst.close();
 
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패");
@@ -49,7 +43,7 @@ public class DBConnect {
 		}
 	}
 
-	public static void test() {
+	public static void getProductData() {
 		String sql = "SELECT productId, categoryId, name, price FROM productdata";
 		try {
 			rs = st.executeQuery(sql);
@@ -64,7 +58,6 @@ public class DBConnect {
 		try {
 			rs = st.executeQuery(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -75,7 +68,6 @@ public class DBConnect {
 		try {
 			rs = st.executeQuery(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -86,7 +78,6 @@ public class DBConnect {
 		try {
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
@@ -98,7 +89,6 @@ public class DBConnect {
 		try {
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
